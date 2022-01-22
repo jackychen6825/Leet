@@ -115,3 +115,46 @@ var deleteNode = function(node) {
     node.val = node.next.val;
     node.next = node.next.next;
 };
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {number} low
+ * @param {number} high
+ * @return {number}
+ */
+var rangeSumBST = function(root, low, high) {
+    let sum = 0;
+    
+    const dfs = (root) => {
+        //recursive case 
+        if (root === null) return;
+        
+        //check the left case:
+        if (root.left) {
+            dfs(root.left)
+        } 
+        
+        //check the curr node 
+        if (root.val >= low && root.val <= high) {
+            sum += root.val
+        }
+        
+        //check the right node 
+        if (root.right) {
+            dfs(root.right)
+        }
+    }
+    
+    //return sum 
+    dfs(root) 
+    return sum;
+    
+};
