@@ -64,3 +64,39 @@ var smallerNumbersThanCurrent = function(nums) {
     return ans;
 };
 
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var middleNode = function(head) {
+    let counter = 0;
+    let midCount;
+    let ans = head;
+    
+    //check how long the linked list is
+    while (head) {
+        head = head.next
+        counter += 1
+    }
+    
+    //find the middle node 
+    if (counter % 2 === 0) {
+        midCount = counter / 2
+    } else {
+        midCount = Math.floor(counter/2) 
+    }
+    
+    for (let i = 0; i < midCount; i++) {
+        ans = ans.next;
+    }
+    
+    return ans;
+};
+
