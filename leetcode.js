@@ -158,3 +158,42 @@ var rangeSumBST = function(root, low, high) {
     return sum;
     
 };
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var getLonelyNodes = function(root) {
+    const lonelyNodes = [];
+    
+    //traverse using depth first search 
+    const dfs = (root) => {
+        //recursive base case 
+        if (root === null) return;
+        
+        //application to the left side 
+        if (root.left) dfs(root.left)
+        
+        //application to the actual node 
+        if (root.left && !root.right) {
+            //left node is an only child 
+            lonelyNodes.push(root.left.val)
+        } else if (root.right && !root.left) {
+            lonelyNodes.push(root.right.val)
+        }
+        
+        //apply to the right node 
+        if (root.right) dfs(root.right)
+    }
+    
+    dfs(root)
+    return lonelyNodes;
+};
