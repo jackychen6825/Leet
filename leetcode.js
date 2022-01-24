@@ -277,3 +277,29 @@ var restoreString = function(s, indices) {
     
     return ans;
 };
+
+/**
+ * @param {string} keyboard
+ * @param {string} word
+ * @return {number}
+ */
+var calculateTime = function(keyboard, word) {
+    let ans = 0
+    let currIndex = 0
+    let time = 0
+    
+    //iterate through every letter of word 
+    for (let i = 0; i < word.length; i++) {
+        //find this letter within the alphabet - keyboard 
+        for (let j = 0; j < keyboard.length; j++) {
+            //if the char matches the letter then compute time etc
+            if (word[i] === keyboard[j]) {
+                ans += ((currIndex - j) ** 2) ** .5
+                currIndex = j
+            } //needs to be positive
+            
+        }
+    }
+    
+    return ans 
+};
