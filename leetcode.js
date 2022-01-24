@@ -234,3 +234,46 @@ var increasingBST = function(root) {
     
     return buildTree(arr);
 };  
+
+
+/**
+ * @param {string} jewels
+ * @param {string} stones
+ * @return {number}
+ */
+var numJewelsInStones = function (jewels, stones) {
+    const j = jewels.split("")
+    const s = stones.split("")
+
+    let ans = 0;
+
+    s.forEach(stone => {
+        if (j.includes(stone)) ans += 1
+    })
+
+    return ans;
+};
+
+/**
+ * @param {string} s
+ * @param {number[]} indices
+ * @return {string}
+ */
+var restoreString = function(s, indices) {
+    let currIdx = 0 
+    let index, 
+        ans = '';
+    
+    //while the current index is less than the length of 
+    while (currIdx < indices.length) {
+        //iterate through indicies arr and find the curridx
+        for (let i = 0; i < indices.length; i++) {
+            if (indices[i] === currIdx) ans += s[i] //push on the associated str to ans 
+            
+        }
+        
+        currIdx += 1 //move on to the next index;
+    }
+    
+    return ans;
+};
