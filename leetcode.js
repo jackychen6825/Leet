@@ -457,3 +457,43 @@ var deleteDuplicates = function(head) {
     
     return head
 };
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var isPalindrome = function(head) {
+    const values = []
+    let first, second;
+    
+    while (head) {
+        values.push(head.val)
+        head = head.next;
+    }
+
+    
+    if (values.length % 2 === 0) {
+        let midIdx = values.length / 2
+        first = values.slice(0, midIdx)
+        second = values.slice(midIdx, values.length)
+    } else {
+        let midIdx = Math.floor(values.length / 2)
+        first = values.slice(0, midIdx)
+        second = values.slice(midIdx + 1, values.length)
+    }
+    
+    for (let i = 0; i < first.length; i++) {
+        let j = first.length-1 - i
+        if (first[i] !== second[j]) return false 
+    }
+    
+    return true 
+    
+};
