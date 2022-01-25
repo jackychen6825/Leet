@@ -334,3 +334,30 @@ var balancedStringSplit = function(s) {
     
     return ans
 };
+
+/**
+ * @param {string[][]} items
+ * @param {string} ruleKey
+ * @param {string} ruleValue
+ * @return {number}
+ */
+var countMatches = function (items, ruleKey, ruleValue) {
+
+    let ans = 0
+
+    for (let i = 0; i < items.length; i++) {
+        if (ruleKey === 'color') {
+            if (items[i][1] === ruleValue) ans++
+
+        } else if (ruleKey === 'type') {
+            if (items[i][0] === ruleValue) ans++
+
+        } else {
+            if (items[i][2] === ruleValue) ans++
+
+        }
+    }
+
+    return ans
+
+};
