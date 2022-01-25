@@ -399,3 +399,28 @@ var getIntersectionNode = function(headA, headB) {
     //the while loop has exited so no intersecting nodes 
     return null
 };
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} headA
+ * @param {ListNode} headB
+ * @return {ListNode}
+ */
+var getIntersectionNode = function(headA, headB) {
+    let pointerToA = headA,
+        pointerToB = headB
+    
+    while (pointerToA !== pointerToB) {
+        pointerToA = pointerToA === null ? headB : pointerToA.next
+        pointerToB = pointerToB === null ? headA : pointerToB.next
+    }
+    
+    return pointerToA 
+};
