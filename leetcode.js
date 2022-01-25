@@ -313,3 +313,24 @@ var interpret = function(command) {
     return command.split('()').join('o').split('(al)').join('al')
     
 };
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var balancedStringSplit = function(s) {
+    let ans = 0,
+        count = 0
+    
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] === 'R') {
+            count += 1
+        } else {
+            count -= 1
+        }
+        
+        if (count === 0) ans ++
+    }
+    
+    return ans
+};
