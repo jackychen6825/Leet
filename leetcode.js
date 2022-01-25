@@ -424,3 +424,36 @@ var getIntersectionNode = function(headA, headB) {
     
     return pointerToA 
 };
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var deleteDuplicates = function(head) {
+    if (!head || !head.next) return head
+    
+    let prev = head,
+        curr = head.next
+    
+    while (curr) {
+        if (prev.val === curr.val) {
+            //do i need temp?
+            // let temp = curr;
+            prev.next = curr.next
+            curr = curr.next
+            // temp = null
+        } else {
+            prev = prev.next
+            curr = curr.next
+        }
+    }
+    
+    return head
+};
