@@ -361,3 +361,41 @@ var countMatches = function (items, ruleKey, ruleValue) {
     return ans
 
 };
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} headA
+ * @param {ListNode} headB
+ * @return {ListNode}
+ */
+var getIntersectionNode = function(headA, headB) {
+    let pointerA = headA;
+    let pointerB = headB;
+    
+    //iterate through linked list A
+    while (pointerA) {
+        while(pointerB) {
+            if (pointerB === pointerA) {
+                return pointerB
+            } else {
+                pointerB = pointerB.next;
+            }
+        }
+        
+        //has gone through all of the nodes once 
+        //reset pointer b 
+        pointerB = headB;
+        //move to the next node for A
+        pointerA = pointerA.next
+    }
+    
+    //the while loop has exited so no intersecting nodes 
+    return null
+};
