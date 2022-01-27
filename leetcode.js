@@ -497,3 +497,23 @@ var isPalindrome = function(head) {
     return true 
     
 };
+
+/**
+ * @param {number[][]} edges
+ * @return {number}
+ */
+var findCenter = function(edges) {
+    const map = {}
+    
+    edges.forEach(edge => {
+        let [e1, e2] = edge
+        
+        if (map[e1]) return e1
+        if (map[e2]) return e2
+        
+        map[e1] = true
+        map[e2] = true
+    })
+    
+    console.log(map)
+};
