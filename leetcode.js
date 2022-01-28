@@ -609,3 +609,28 @@ var preorder = function(root) {
     helper(root);
     return output;
 };
+
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var removeDuplicates = function(s) {
+    //if s is just one char or no chars, return it;
+    if (s.length <= 1) return s;
+    
+    let stack = [s[0]] //initialize a stack with the first letter of s 
+    
+    for (let i = 1; i < s.length; i++) {
+        if (stack[stack.length-1] === s[i]) {
+            //if the last element in the stack is equal to the first element of the string, pop it off the stack;
+            
+            stack.pop();
+        } else {
+            //otherwise not adjacent pairs, so just add on 
+            stack.push(s[i])
+        }
+    }
+    
+    return stack.join('');
+    
+};
