@@ -573,3 +573,39 @@ var postorder = function(root) {
     return output;
     
 };
+
+/**
+ * // Definition for a Node.
+ * function Node(val, children) {
+ *    this.val = val;
+ *    this.children = children;
+ * };
+ */
+
+/**
+ * @param {Node|null} root
+ * @return {number[]}
+ */
+var preorder = function(root) {
+    const output = []
+    
+    //tree must be empty 
+    if (!root) return output;
+    
+    const helper = root => {
+        output.push(root.val); //add the root node's val first 
+        
+        let children = root.children;
+        //iterate through its children? 
+        for (let i = 0; i < children.length; i++) {
+            //need to call help on this bitch/
+            helper(children[i])
+        }
+        
+        //once it has done it for its children do it for thecurr node 
+        
+    }
+    
+    helper(root);
+    return output;
+};
