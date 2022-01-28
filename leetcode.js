@@ -536,3 +536,40 @@ var finalPrices = function(prices) {
     
     return prices;
 };
+
+/**
+ * // Definition for a Node.
+ * function Node(val,children) {
+ *    this.val = val;
+ *    this.children = children;
+ * };
+ */
+
+/**
+ * @param {Node|null} root
+ * @return {number[]}
+ */
+var postorder = function(root) {
+    const output = []; 
+    
+    if (!root) return output;
+    
+    const helper = (node) => {
+        //need to visit the node's children 
+        let children = node.children;
+        
+        
+        //this part is the defining char of bfs
+        for (let i = 0; i < children.length; i++) {
+            //recursive call to the children -- this will hit the depth because it will keep calling this helper on its children 
+            helper(children[i]);
+        }
+        
+        output.push(node.val);
+    }
+    
+    helper(root);
+    
+    return output;
+    
+};
