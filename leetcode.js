@@ -634,3 +634,34 @@ var removeDuplicates = function(s) {
     return stack.join('');
     
 };
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {number} val
+ * @return {TreeNode}
+ */
+var searchBST = function(root, val) {
+    //initialize the queue with an item in it 
+    const queue = [root]
+    
+    //initialize while loop that runs while the queue is not empty 
+    while (queue.length) {
+        const curr = queue.shift() //take the first element from the queue
+        if (curr.val === val) return curr;
+        //if you're here, then the curr node is not the right node so add its children 
+        //in this case children = right or left 
+        if (curr.left) queue.push(curr.left)
+        if (curr.right) queue.push(curr.right)
+    }
+    
+    //if nothing can be found simply return null
+    return null;
+};
