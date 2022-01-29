@@ -665,3 +665,47 @@ var searchBST = function(root, val) {
     //if nothing can be found simply return null
     return null;
 };
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {number[]} preorder
+ * @param {number[]} inorder
+ * @return {TreeNode}
+ */
+var buildTree = function (preorder, inorder) {
+
+    //recursive base case - what if both preorder and inorder are empty?
+    if (preorder.length === 0 && inorder.length === 0) return null;
+
+    //in the preorder the root node is at index 0
+    let rootVal = preorder[0];
+    //initialize a tree node with the rootVal;
+    let root = new TreeNode(rootVal);
+    //find the index of the rootval in the inorder arr
+    let rootIdx = inorder.indexOf(rootVal);
+    //everything left in the inorder arr must be in the left subtree and vice versa
+    let leftTreeInorder = inorder.slice(0, rootIdx);
+    let rightTreeInorder = inorder.slice(rootIdx + 1);
+
+    //now we need to extract from the preorder arr for both left and right subtrees 
+    let leftTreePreOrder = preorder.filter(val => leftTreeInorder.includes(val))
+    let rightTreePreOrder = preorder.filter(val => rightTreeInorder.includes(val))
+
+    //finally we can make the recursive call?
+    let leftSubTree = buildTree(leftTreePreOrder, leftTreeInorder);
+    let rightSubTree = buildTree(rightTreePreOrder, rightTreeInorder);
+
+    //connect the trees 
+    root.left = leftSubTree;
+    root.right = rightSubTree;
+
+    return root;
+
+};
