@@ -709,3 +709,28 @@ var buildTree = function (preorder, inorder) {
     return root;
 
 };
+
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var countKDifference = function(nums, k) {
+    let count = 0;
+    for (let i = 0; i < nums.length; i++) {
+        let first = nums[i];
+        for (let j = i+1; j < nums.length; j++) {
+            let second = nums[j];
+            let absolute;
+            if (first - second < 0) {
+                absolute = (first - second) * -1;
+            } else {
+                absolute = first - second 
+            }
+            
+            if (absolute === k) count++
+        };
+    };
+    
+    return count;
+};
