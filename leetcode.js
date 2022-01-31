@@ -798,3 +798,23 @@ var createTargetArray = function(nums, index) {
     
     return target;
 };
+
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var sortSentence = function(s) {
+    const words = s.split(" ");
+    const hash = {}, ans = [];
+    
+    for (let i = 0; i < words.length; i++) {
+        const pos = words[i].slice(-1);
+        hash[pos] = words[i].slice(0, words[i].length-1);
+    }
+    
+    Object.keys(hash).sort((a,b) => a-b).forEach(pos => {
+        ans.push(hash[pos]);
+    });
+    
+    return ans.join(' ');
+};
