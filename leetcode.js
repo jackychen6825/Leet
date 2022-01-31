@@ -770,3 +770,31 @@ var decompressRLElist = function(nums) {
     
     return output;
 };
+
+/**
+ * @param {number[]} nums
+ * @param {number[]} index
+ * @return {number[]}
+ */
+var createTargetArray = function(nums, index) {
+    let target = [];
+    
+   for (let i = 0; i < nums.length; i++) {
+       const idx = index[i];
+       const num = nums[i];
+       
+       if (target[idx] === null) {
+           //since there is no val in the target arr at that index insert 
+           target[idx] = num;
+       } else {
+           //there is a val there 
+           const firstHalf = target.slice(0, idx); //grab everything except for the index
+           firstHalf.push(num); //add in nums 
+           const secondHalf = target.slice(idx); //grab everything from the second half 
+           //bring everything together 
+           target = [...firstHalf, ...secondHalf];
+       };
+   };
+    
+    return target;
+};
