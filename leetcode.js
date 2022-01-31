@@ -734,3 +734,18 @@ var countKDifference = function(nums, k) {
     
     return count;
 };
+
+/**
+ * @param {number[]} encoded
+ * @param {number} first
+ * @return {number[]}
+ */
+var decode = function(encoded, first) {
+    const output = [first];
+    
+    for (let i = 0; i < encoded.length; i++) {
+        output[i+1] = output[i] ^ encoded[i];
+    }
+    
+    return output;
+};
