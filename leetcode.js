@@ -749,3 +749,24 @@ var decode = function(encoded, first) {
     
     return output;
 };
+
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var decompressRLElist = function(nums) {
+     const output = [];
+    
+    //would like to increment i by 2 
+    for (let i = 0; i < nums.length; i += 2) {
+        //grab the freq and val to be pushed 
+        const freq = nums[i];
+        const val = nums[i+1];
+        //push the val the appropriate number of times
+        for (let times = 0; times < freq; times++) {
+            output.push(val);
+        };
+    };
+    
+    return output;
+};
