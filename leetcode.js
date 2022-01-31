@@ -832,3 +832,28 @@ var arrayStringsAreEqual = function(word1, word2) {
     
     return str1 === str2;
 };
+
+/**
+ * @param {string} allowed
+ * @param {string[]} words
+ * @return {number}
+ */
+var countConsistentStrings = function(allowed, words) {
+    const allowedArr = allowed.split("");
+    let count = 0; 
+    
+    for (let i = 0; i < words.length; i++) {
+        const word = words[i];
+        count++;
+        
+        for (let j = 0; j < word.length; j++) {
+            const char = word.charAt(j); 
+            if (!allowedArr.includes(char)) { 
+                count--; 
+                break; 
+            };
+        };
+    };
+    
+    return count;
+};
