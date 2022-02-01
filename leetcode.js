@@ -1048,3 +1048,103 @@ MyHashSet.prototype.contains = function(key) {
  * obj.remove(key)
  * var param_3 = obj.contains(key)
  */
+
+
+var MyHashMap = function() {
+    this.maxSize = 10000;
+    this.buckets = [];
+    for (let i = 0; i < this.maxSize; i++) {
+        this.buckets.push(new BasicHashMap());
+    }
+};
+
+MyHashMap.prototype.getHashVal = function(key) {
+    let hash = 0;
+    for (let i = 0; i < key.length; i++) {
+        hash += key.charCodeAt(i) * i;
+    };
+    
+    return hash;
+};
+
+MyHashMap.prototype.getBucketIndex = function(key) {
+    return this.getHashVal(key) % this.maxSize;
+}
+
+MyHashMap.prototype.getBucket = function(key) {
+    return this.buckets[this.getBucketIndex(key)];
+}
+
+/** 
+ * @param {number} key 
+ * @param {number} value
+ * @return {void}
+ */
+MyHashMap.prototype.put = function(key, value) {
+    const basicBucket = this.getBucket(key);
+    basicBucket.set(key, value);
+};
+
+/** 
+ * @param {number} key
+ * @return {number}
+ */
+MyHashMap.prototype.get = function(key) {
+    const basicBucket = this.getBucket(key);
+    return basicBucket.get(key);
+};
+
+/** 
+ * @param {number} key
+ * @return {void}
+ */
+MyHashMap.prototype.remove = function(key) {
+    const basicBucket = this.getBucket(key);
+    basicBucket.delete(key);
+};
+
+/** 
+ * Your MyHashMap object will be instantiated and called as such:
+ * var obj = new MyHashMap()
+ * obj.put(key,value)
+ * var param_2 = obj.get(key)
+ * obj.remove(key)
+ */
+
+var BasicHashMap = function() {
+    this.keys = [];
+    this.values = [];
+};
+
+BasicHashMap.prototype.set = function(key, value) {
+   
+    let isPresent = false;
+    for (let i = 0; i < this.keys.length; i++) {
+        if (this.keys[i] === key) {
+            //if already there switch with the new value 
+            this.values[i] = value;
+            isPresent = true;
+        };
+    }; 
+    
+    if (!isPresent) {
+        this.keys.push(key);
+        this.values.push(value);
+    };  
+};
+
+BasicHashMap.prototype.get = function(key) {
+    for (let i = 0; i < this.keys.length; i++) {
+        if (this.keys[i] === key) return this.values[i];
+    };
+    
+    return -1;
+};
+
+BasicHashMap.prototype.delete = function(key) {
+    let index = this.keys.indexOf(key);
+    if (index > -1) {
+        this.keys.splice(index, 1);
+        this.values.splice(index, 1);
+    };
+};
