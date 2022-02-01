@@ -907,3 +907,23 @@ var checkIfPangram = function(sentence) {
     return false;
     
 };
+
+/**
+ * @param {string[]} words
+ * @return {string}
+ */
+var firstPalindrome = function(words) {
+    for (let i = 0; i < words.length; i++) {
+        let word = words[i];
+        
+        if (isPalindrome(word)) return word;
+    };
+    
+    return "";
+};
+
+var isPalindrome = function(word) {
+    //check the if the reverse word is just like the word;
+    let reverse = word.split('').reverse().join('');
+    return word === reverse; //will return a boolean    
+};
