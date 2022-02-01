@@ -927,3 +927,39 @@ var isPalindrome = function(word) {
     let reverse = word.split('').reverse().join('');
     return word === reverse; //will return a boolean    
 };
+
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var toLowerCase = function(s) {
+    return s.toLowerCase(); //lmaoo what the fuckkk 
+};
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var hasCycle = function(head) {
+    if (!head) return false; //given an empty list 
+    
+    let hashMap = new Map();
+    while(head) {
+        if (hashMap.has(head)) { //if it has the node?
+            return true;
+        } else {
+            hashMap.set(head, true) //node becomes the key and the val is true 
+            head = head.next;
+        };
+    };
+    
+    return false;
+};
