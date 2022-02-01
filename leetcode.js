@@ -963,3 +963,88 @@ var hasCycle = function(head) {
     
     return false;
 };
+
+
+var MyHashSet = function() {
+    this.set = new Array(1000); //make a new arr of size 1000;
+    this.set.fill(false); //fill the arr with false values 
+    this.hash = (input) => {
+        return input % 769 //mod by a prime number to reduce collisions 
+    };
+};
+
+/** 
+ * @param {number} key
+ * @return {void}
+ */
+MyHashSet.prototype.add = function(key) {
+    //this.hash(key) - given a input return the hashed output
+    //key into that index of the arr 
+    if (this.set[this.hash(key)]) {
+        let node = this.set[this.hash(key)]; //linked list at the arr so grab the head
+        while(node.next) { //while there is a node.next keep traversing
+            if (node.val === key) return; //if there is already something within the hash set with that val just do nothing since a set cannot contain dups
+            node = node.next; //else there isnt so go on to the next until you hit null
+        };
+        
+        //we are at the final node 
+        if (node.val === key) return;
+        
+        //set the next node 
+        node.next = {
+            val: key, 
+            next: null
+        };
+        
+    } else {
+        //there is nothing at that index so just set it
+        this.set[this.hash(key)] = {
+            val: key, 
+            next: null
+        };
+    };
+};
+
+/** 
+ * @param {number} key
+ * @return {void}
+ */
+MyHashSet.prototype.remove = function(key) {
+    //want to remove a value from a hash set?
+    let node = this.set[this.hash(key)];
+    let prev = undefined;
+    
+    while (node) {
+        if (node.val === key) {
+            if (prev) {
+                prev.next = node.next; //remove the node from the linked list 
+            } else {
+                this.set[this.hash(key)] = node.next; //remove node from the begin.
+            }
+        }
+        
+        prev = node;
+        node = node.next;
+    }
+};
+
+/** 
+ * @param {number} key
+ * @return {boolean}
+ */
+MyHashSet.prototype.contains = function(key) {
+    let node = this.set[this.hash(key)]; //get the root node
+    while(node) {
+        if (node.val === key) return true;
+        node = node.next;
+    };
+    return false;
+};
+
+/** 
+ * Your MyHashSet object will be instantiated and called as such:
+ * var obj = new MyHashSet()
+ * obj.add(key)
+ * obj.remove(key)
+ * var param_3 = obj.contains(key)
+ */
