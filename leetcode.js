@@ -889,3 +889,21 @@ var countPoints = function(rings) {
     
     return count;
 };
+
+/**
+ * @param {string} sentence
+ * @return {boolean}
+ */
+var checkIfPangram = function(sentence) {
+    
+    //using a new set data structure an obj with only keys 
+    let set = new Set();
+    
+    for (let i = 0; i < sentence.length; i++) {
+        set.add(sentence[i]); //it seems like a set cannot have repeat vals 
+    };
+    
+    if (set.size === 26) return true; 
+    return false;
+    
+};
