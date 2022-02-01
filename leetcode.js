@@ -857,3 +857,35 @@ var countConsistentStrings = function(allowed, words) {
     
     return count;
 };
+
+/**
+ * @param {string} rings
+ * @return {number}
+ */
+var countPoints = function(rings) {
+    const rods = []; //initalize the rods arr;
+    let count = 0; //this is going to be the answer;
+    
+    for (let i = 0; i < rings.length; i += 2) { //iterate through rings
+        const color = rings.charAt(i); //char at this idx 
+        const pos = rings.charAt(i+1);
+        
+        if (!rods[pos]) { //if there is nothing there 
+            rods[pos] = [color]; //if there is nothing there init an arr with the color 
+        } else {
+            //there already is something there;
+            rods[pos].push(color); 
+        };
+    };
+    
+    //hence rods is now an arr of arrs;
+    for (let i = 0; i < rods.length; i++) {
+        const rod = rods[i];
+        if (rod) {
+            if (rod.includes('R') && rod.includes('G') && rod.includes('B')) count++
+        };  
+    };
+        
+    
+    return count;
+};
