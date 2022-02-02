@@ -1344,3 +1344,36 @@ var validPath = function(n, edges, source, destination) {
     
     return false;
 };
+
+/**
+ * @param {number} n
+ * @param {number[][]} trust
+ * @return {number}
+ */
+var findJudge = function(n, trust) {
+    if (!trust.length && n === 1) return 1
+    
+    const trustMap = {};
+    trust.forEach(([a, b]) => {
+        if (!trustMap[a]) {
+            trustMap[a] = [b];
+        } else {
+            trustMap[a].push(b);
+        };
+    });
+    
+    const trustCount = {};
+    trust.forEach(([a, b]) => {
+        if (!trustCount[b]) {
+            trustCount[b] = 1;
+        } else {
+            trustCount[b]++
+        };
+    });
+    
+    for (const ind in trustCount) {
+        if (trustCount[ind] === n-1 && !trustMap[ind]) return ind;
+    };
+    
+    return -1;
+};
