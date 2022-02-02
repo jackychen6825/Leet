@@ -1402,3 +1402,32 @@ var findJudge = function(n, trust) {
     
     return -1
 };
+
+/**
+ * @param {number[][]} graph
+ * @return {number[][]}
+ */
+var allPathsSourceTarget = function(graph) {
+    const result = [];
+    dfsHelper(0, [], graph, result);
+    return result;
+    
+};
+
+var dfsHelper = function(currNodeIdx, currPath, graph, result) {
+    const target = graph.length-1;
+    if (currNodeIdx === target) {
+        result.push(currPath.concat(currNodeIdx));
+        return
+    };
+    
+    //iterate through the neighbors 
+    for (let i = 0; i < graph[currNodeIdx].length; i++) {
+        dfsHelper(
+            graph[currNodeIdx][i],
+            currPath.concat(currNodeIdx),
+            graph, 
+            result
+        );
+    };
+}
