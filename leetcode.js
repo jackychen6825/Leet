@@ -1431,3 +1431,24 @@ var dfsHelper = function(currNodeIdx, currPath, graph, result) {
         );
     };
 }
+
+/**
+ * @param {number} n
+ * @param {number[][]} edges
+ * @return {number[]}
+ */
+var findSmallestSetOfVertices = function(n, edges) {
+    const graph = new Array(n);
+    graph.fill(0);
+    
+    for (let [from, to] of edges) {
+        graph[to]++ 
+    };
+    
+    const results = [];
+    for (let i = 0; i < graph.length; i++) {
+        if (graph[i] === 0) results.push(i)
+    };
+    
+    return results;
+};
