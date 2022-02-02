@@ -1377,3 +1377,28 @@ var findJudge = function(n, trust) {
     
     return -1;
 };
+
+/**
+ * @param {number} n
+ * @param {number[][]} trust
+ * @return {number}
+ */
+var findJudge = function(n, trust) {
+    if (trust.length < n-1) return -1; //need at least n-1 trusts to have a town judge 
+    
+    const indegrees = new Array(n+1);
+    indegrees.fill(0);
+    const outdegrees = new Array(n+1); 
+    outdegrees.fill(0);
+    
+    trust.forEach(([a, b]) => {
+        indegrees[b]++
+        outdegrees[a]++
+    });
+    
+    for (let i = 1; i <= n; i++) {
+        if (indegrees[i] === n-1 && outdegrees[i] === 0) return i;
+    };
+    
+    return -1
+};
