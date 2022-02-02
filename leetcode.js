@@ -1261,3 +1261,52 @@ var pairSum = function(head) {
     
     return max;
 };
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} list1
+ * @param {number} a
+ * @param {number} b
+ * @param {ListNode} list2
+ * @return {ListNode}
+ */
+var mergeInBetween = function(list1, a, b, list2) {
+    
+    let currIdx = 0, 
+        prev = undefined,
+        curr = list1,
+        connectorNode;
+    
+    while (curr) {
+        if (currIdx === a) {
+            prev.next = list2;
+        };
+        
+        if (currIdx === b) {
+            connectorNode = curr.next;
+            break;
+        };
+        
+        currIdx++;
+        prev = curr;
+        curr = curr.next;
+    };
+    
+    //we need to connect list 2 with list 1 at the connector node 
+    while (list2) {
+        if (!list2.next) {
+            list2.next = connectorNode;
+            break;
+        };
+        
+        list2 = list2.next;
+    };
+    
+    return list1;
+};
