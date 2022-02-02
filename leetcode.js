@@ -1180,3 +1180,44 @@ var traverseNode = function(node) {
     traverseNode(next);
     node.printValue();
 };
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {number}
+ */
+var pairSum = function(head) {
+    const nodes = [];
+    const reversed = [];
+    
+    //get the val of each node 
+    while (head) {
+        nodes.push(head.val);
+        head = head.next;
+    };
+    
+    //get the nodes in reverse order;
+    for (let i = nodes.length-1; i >= 0; i--) {
+        const node = nodes[i];
+        reversed.push(node);
+    };
+    
+    let midIdx = nodes.length;
+    let maxSum = -Infinity;
+    
+    for (let i = 0; i < midIdx; i++) {
+        const twin1 = nodes[i];
+        const twin2 = reversed[i];
+        const sum = twin1 + twin2;
+        if (maxSum < sum) maxSum = sum;
+    };
+    
+    return maxSum;
+    
+};
