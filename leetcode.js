@@ -1221,3 +1221,43 @@ var pairSum = function(head) {
     return maxSum;
     
 };
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {number}
+ */
+var pairSum = function(head) {
+    //find the mid point 
+    let slow = head, fast = head;
+    
+    while (fast) {
+        slow = slow.next; //move this one progression
+        fast = fast.next;
+        if (fast) fast = fast.next;  
+    };
+    
+    let prev = null,
+        curr = slow; //the slow pointer is currently at mid
+    while (curr) {
+        const nextNode = curr.next;
+        curr.next = prev; //begins with nothing
+        prev = curr //change prev
+        curr = nextNode; //had this stored;
+    };
+    
+    let max = -Infinity;
+    while (head && prev) {
+        max = Math.max(max, head.val + prev.val);
+        head = head.next;
+        prev = prev.next;
+    }
+    
+    return max;
+};
