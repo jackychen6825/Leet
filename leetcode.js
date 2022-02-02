@@ -1310,3 +1310,37 @@ var mergeInBetween = function(list1, a, b, list2) {
     
     return list1;
 };
+
+/**
+ * @param {number} n
+ * @param {number[][]} edges
+ * @param {number} source
+ * @param {number} destination
+ * @return {boolean}
+ */
+var validPath = function(n, edges, source, destination) {
+    let graph = new Map();
+    
+    //make adjacency matrix 
+    edges.forEach(([a,b]) => {
+        if (!graph.has(a)) graph.set(a, []);
+        if (!graph.has(b)) graph.set(b, []);
+        graph.get(a).push(b);
+        graph.get(b).push(a);
+    });
+    
+    //since bi-directional, we need to prevent revisiting nodes
+    let visited = [];
+    let queue = [source];
+    while (queue.length > 0) {
+        let curr = queue.shift();
+        if (curr === destination) return true;
+        visited[curr] = true;
+        
+        graph.get(curr).forEach((neighbor) => {
+            if (!visited[neighbor]) queue.push(neighbor)
+        })
+    }
+    
+    return false;
+};
