@@ -1615,3 +1615,29 @@ var isArrConsistent = (arr) => {
     
     return true;
 }
+
+/**
+ * @param {string[]} logs
+ * @return {number}
+ */
+var minOperations = function(logs) {
+    //create a stack variable implmented by an arr 
+    let stack = ['main']; //O(1)
+    //iterate through the logs arr 
+    logs.forEach(op => { //O(N) where n is the length of the log 
+        if (op === '../') {
+            if (stack[stack.length-1] !== 'main') stack.pop()
+        } else if (op === './') {
+            //do nothing 
+        } else {
+            stack.push('random folder')
+        };
+    })
+    //for each action within the logs arr perform it using conditionals
+    
+    //return the length of the stack-1 that is how many steps you need to return back to the main folder 
+   return stack.length-1 //O(s) where s is the length of the stack 
+};
+
+//o (n+s)
+//no one gives a fuck abt space complexity
