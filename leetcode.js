@@ -1537,3 +1537,39 @@ var isArrEqual = (arr1, arr2) => {
     
     return true;
 }
+
+/**
+ * @param {string[]} ops
+ * @return {number}
+ */
+var calPoints = function(ops) {
+    // Input: ops = ["5","2","C","D","+"]
+    // Output: 30
+    // Explanation:
+    // "5" - Add 5 to the record, record is now [5].
+    // "2" - Add 2 to the record, record is now [5, 2].
+    // "C" - Invalidate and remove the previous score, record is now [5].
+    // "D" - Add 2 * 5 = 10 to the record, record is now [5, 10].
+    // "+" - Add 5 + 10 = 15 to the record, record is now [5, 10, 15].
+    // The total sum is 5 + 10 + 15 = 30.
+    
+    //create a record arr that holds all the scores across rounds 
+    let record = [];
+    //iterate through the ops check each operation and perform oper on the record arr 
+    ops.forEach(op => {
+        if (op === '+') {
+            record.push(record[record.length-1] + record[record.length-2])
+        } else if (op === 'D') {
+            record.push(record[record.length-1] * 2)
+        } else if (op === 'C') {
+            record.pop()
+        } else {
+            record.push(parseInt(op))
+        }
+    })
+    //return sum of record arr 
+    const reducer = (val1, val2) => val1 + val2;
+    console.log(record)
+    return record.reduce(reducer)
+    
+};
