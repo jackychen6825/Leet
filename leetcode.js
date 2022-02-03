@@ -1573,3 +1573,45 @@ var calPoints = function(ops) {
     return record.reduce(reducer)
     
 };
+
+/**
+ * @param {number[]} students
+ * @param {number[]} sandwiches
+ * @return {number}
+ */
+var countStudents = function(students, sandwiches) {
+    
+    
+    //we will need a while loop for this, continue looping until either students or sandwiches are empty or when all the students have the same preference and there are no more sandwiches of this preference left 
+    let completed = false;
+    
+    console.log(isArrConsistent(students))
+    
+    while (!completed) {
+        if (students.length === 0 || sandwiches.length === 0 || (isArrConsistent(students) && students[0] !== sandwiches[0])) completed = true;
+        
+        let pref = students[0]
+        let topSandwich = sandwiches[0]
+        
+        if (pref === topSandwich) {
+            students.shift();
+            sandwiches.shift();
+        } else {
+            let firstStudent = students.shift()
+            students.push(firstStudent)
+        }
+    }
+    
+    return students.length
+    
+};
+
+//do all the students have the same prefernce?
+var isArrConsistent = (arr) => {
+    
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] !== arr[0]) return false
+    }
+    
+    return true;
+}
