@@ -1641,3 +1641,45 @@ var minOperations = function(logs) {
 
 //o (n+s)
 //no one gives a fuck abt space complexity
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var postorderTraversal = function(root) {
+    //post order traversal is when we hit left, right and then middle 
+    
+    //make recursive base case - the simplest thing ie no root 
+    
+    //call function on the left side 
+    //call function on the right side 
+    //call function on the root node 
+    
+    //need to init arr and push values into it as we traverse 
+    
+    var postOrderVal = [];
+    
+    //helper function 
+    var postOrder = root => {
+        if (!root) return; 
+        
+        if (root.left) postOrder(root.left)
+        if (root.right) postOrder(root.right)
+        postOrderVal.push(root.val);
+    }
+    
+    postOrder(root)
+    
+    return postOrderVal;
+    
+};
+
+//time complexity - we need to iterate through every node so o(n) where n = num nodes 
