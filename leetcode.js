@@ -1469,3 +1469,21 @@ var maxSubArray = function(nums) {
     
     return max;
 };
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var maxDepth = function(s) {
+    let maxLength = 0,
+        stack = []; //here we are implementing a stack w arr
+    
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] === "(") stack.push('(');
+        if (s[i] === ")") stack.pop();
+        
+        if (stack.length > maxLength) maxLength = stack.length;
+    };
+    
+    return maxLength;
+};
