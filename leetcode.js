@@ -1487,3 +1487,53 @@ var maxDepth = function(s) {
     
     return maxLength;
 };
+
+/**
+ * @param {number[]} target
+ * @param {number} n
+ * @return {string[]}
+ */
+var buildArray = function(target, n) {
+//     Input: target = [1,3], n = 3
+    // Output: ["Push","Push","Pop","Push"]
+    // Explanation: 
+    // Read number 1 and automatically push in the array -> [1]
+    // Read number 2 and automatically push in the array then Pop it -> [1]
+    // Read number 3 and automatically push in the array -> [1,3]
+    
+    //instantiate a arr called clone and try to match it with target 
+    
+    //iterate in a for loop from 1 to n inclusive and if the value ie i exist within the arr simply push otherwise push and pop if its not in the target arr at every iteration check clone with target and return operations arr if clone == target 
+    
+    let clone = [],
+        operations = [];
+    
+    //init for loop 
+    for (let i = 1; i <= n; i++) {
+        if (target.includes(i)) {
+            clone.push(i);
+            operations.push('Push')
+        } else {
+            //target does not include i therefore 
+            operations.push('Push', 'Pop')
+        };
+        
+       if ( isArrEqual(clone, target)) break;
+        
+    }
+    
+    return operations;
+
+};
+
+var isArrEqual = (arr1, arr2) => {
+    if (arr1 === arr2) return true;
+    if (!arr1 || !arr2) return false;
+    if (arr1.length !== arr2.length) return false;
+    
+    for (let i = 0; i < arr1.length; i++) {
+        if (arr1[i] !== arr2[i]) return false;
+    };
+    
+    return true;
+}
