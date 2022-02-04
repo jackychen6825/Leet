@@ -1926,3 +1926,42 @@ var averageOfLevels = function(root) {
     return answer;
     
 };
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {number[]} nums
+ * @return {TreeNode}
+ */
+var sortedArrayToBST = function(nums) {
+    
+    
+    //we have pointers for left and right that denote a subarr within nums that has been split by the median 
+    
+    //the left pointer doesnt move for the left subtree but the right pointer is always getting smaller, so left is always 0 however, the right pointer can be -1 if the mid index is 0 meaning that the arr is empty that is the base case 
+    
+    //otherwise we make a new node with the middle index and set the left and right subtrees and then return that node 
+    
+    //however to set the left and right subtrees we need to make a recursive call therefore, we can build the tree. with the bottom most nodes first and movigin up 
+    
+    var helper = (left, right) => {
+        if (left > right) return null; //arr is empty
+        
+        //find the median given this left and right sub arr 
+        const medianIdx = Math.floor((left + right) / 2);
+        let node = new TreeNode(nums[medianIdx]);
+        //set the left and right subtrees 
+        node.left = helper(left, medianIdx-1);
+        node.right = helper(medianIdx+1, right);
+        return node;
+    }
+    
+    return helper(0, nums.length-1);
+    
+};
