@@ -1774,3 +1774,48 @@ var areOpposite = (c1, c2) => {
 }
 
 //time complexity = o ( b * s) where b is the num of bad substrings and s is the length of the str although s will decrease with time 
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var sumRootToLeaf = function(root) {
+    
+    //need a helper function 
+    var helper = (root, currPath) => {
+        //base case 
+        if (!root) {
+            return;
+        };
+        
+         let newPath = currPath + root.val;
+        
+        if (!root.left && !root.right) {
+            sum += parseInt(newPath, 2);
+            return;
+        };
+        
+       
+        
+        let left = root.left 
+        helper(left, newPath);
+        
+        let right = root.right 
+        helper(right, newPath);
+    }
+    
+    
+    var sum = 0;
+
+    helper(root, '')
+    
+    return sum;
+};
