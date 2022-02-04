@@ -1819,3 +1819,39 @@ var sumRootToLeaf = function(root) {
     
     return sum;
 };
+
+/**
+ * // Definition for a Node.
+ * function Node(val,children) {
+ *    this.val = val;
+ *    this.children = children;
+ * };
+ */
+
+/**
+ * @param {Node|null} root
+ * @return {number}
+ */
+var maxDepth = function(root) {
+    const helper = (root, path) => {
+        if (!root) return;
+        
+        let newPath = path.concat(root.val);
+        
+        if (root.children.length === 0) {
+            if (maxLength < newPath.length) {
+                maxLength = newPath.length;
+                return;
+            };
+        };
+        
+        root.children.forEach(child => {
+            helper(child, newPath);
+        });
+        
+    }
+    
+    var maxLength = 0;
+    helper(root, []);
+    return maxLength;
+};
