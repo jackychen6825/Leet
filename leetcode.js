@@ -1965,3 +1965,66 @@ var sortedArrayToBST = function(nums) {
     return helper(0, nums.length-1);
     
 };
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root1
+ * @param {TreeNode} root2
+ * @return {boolean}
+ */
+var leafSimilar = function(root1, root2) {
+    //init arrays to hold the leaf value sequence of both trees
+    var leaf1 = [], leaf2 = [];
+    
+    //we can use dfs to traverse both trees and add the val of the leaf nodes
+    
+    const helper1 = root => {
+        if (!root) return;
+        
+        if (!root.right && !root.left) {
+            //root node must be a tree node 
+            leaf1.push(root.val)
+        };
+        
+        helper1(root.left);
+        helper1(root.right);
+    };
+    
+    
+    const helper2 = root => {
+        if (!root) return;
+        
+        if (!root.right && !root.left) {
+            //root node must be a tree node 
+            leaf2.push(root.val)
+        };
+        
+        helper2(root.left);
+        helper2(root.right);
+    };
+    
+    helper1(root1);
+    helper2(root2)
+    
+    
+    //we can define a leaf node as a node with no children so left and right are null
+    //when we have both arrays we just iterate through one arr and ensure that the other arr has matching values if at any point they do not match, we return false 
+    //find the longer 
+    
+    let maxLength = Math.max(leaf1.length, leaf2.length)
+    
+    for (let i = 0; i < maxLength; i++) {
+        if (leaf1[i] !== leaf2[i]) return false;
+    };
+    
+    return true;
+    
+    //upon completion we return true because. every node matched 
+};
