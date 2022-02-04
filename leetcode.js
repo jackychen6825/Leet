@@ -1711,3 +1711,66 @@ var preorderTraversal = function(root) {
     helper(root);
     return preOrderVal;
 };
+
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var makeGood = function(s) {
+    
+    //create a while loop and loop over the function and continue to do so until a condition is met ie there are no more adjacent char with one be upper and the other being lower case 
+    
+    let isCompleted = false;
+    
+    while (!isCompleted) {
+        isCompleted = true;
+        
+        for (let i = 1; i <= s.length-1; i++) {
+            let prev = s[i-1],
+                curr = s[i],
+                next = s[i+1];
+            if (prev && curr) {
+                if (prev.toLowerCase() === curr.toLowerCase() && areOpposite(prev, curr)) {
+                    const first = s.split('').slice(0, i-1).join('');
+                    const second = s.split('').slice(i+1).join('');
+                    s = first + second;
+                    isCompleted = false; 
+                    break;
+                } 
+            }
+                
+            if (next && curr) {
+                if (next.toLowerCase() === curr.toLowerCase() && areOpposite(next, curr)) {
+                    const first = s.split('').slice(0, i).join('');
+                    const second = s.split('').slice(i+2).join('');
+                    s = first + second;
+                    isCompleted = false;
+                    break;
+                };
+            }
+            
+        };
+    };
+    
+    return s;
+    
+    //keep track of the curr char the next char and the prev char and compare them seperately 
+    
+    //if they match the conditions then ... how do we write this condition though? -> helper function 
+    
+    //break apart the input and bring it back together without the bad characters 
+    
+    //return the string s as a good string 
+    
+};
+
+var areOpposite = (c1, c2) => {
+    let upper1, upper2;
+    
+    if (c1.toUpperCase() === c1) upper1 = true;
+    if (c2.toUpperCase() === c2) upper2 = true;
+    
+    return upper1 !== upper2; 
+}
+
+//time complexity = o ( b * s) where b is the num of bad substrings and s is the length of the str although s will decrease with time 
