@@ -1855,3 +1855,34 @@ var maxDepth = function(root) {
     helper(root, []);
     return maxLength;
 };
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+var isUnivalTree = function(root) {
+    var uniValue = root.val;
+    
+    const queue = [root];
+    
+    while (queue.length) {
+        let curr = queue.shift();
+        
+        if (curr.val !== uniValue) return false;
+        
+        if (curr.left) queue.push(curr.left);
+        if (curr.right) queue.push(curr.right);
+    }
+
+    return true;    
+    
+    //time complexity o(n) where n is the num of nodes in this tree 
+};
