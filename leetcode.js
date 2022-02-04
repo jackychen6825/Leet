@@ -1886,3 +1886,43 @@ var isUnivalTree = function(root) {
     
     //time complexity o(n) where n is the num of nodes in this tree 
 };
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var averageOfLevels = function(root) {
+    
+    //using bfs we set a queue and push in values 
+    
+    //for each row we also initialize a next arr that holds the children of the. curr rows nodes 
+    
+    //when we finish iterating through the curr row we set the queue to the next arr which represents the net row
+    
+    let answer = [],
+        queue = [root];
+    
+    while (queue.length) {
+        let next = [], sum = 0;
+        //iterate through the curr queue;
+        for (let node of queue) {
+            sum += node.val;
+            if (node.left) next.push(node.left);
+            if (node.right) next.push(node.right);
+        };
+        //when the loop is completed this level is done
+        answer.push(sum / queue.length);
+        queue = next;
+    };
+    
+    return answer;
+    
+};
