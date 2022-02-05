@@ -2028,3 +2028,51 @@ var leafSimilar = function(root1, root2) {
     
     //upon completion we return true because. every node matched 
 };
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {number} k
+ * @return {boolean}
+ */
+var findTarget = function(root, k) {
+    
+    
+    //traverse through the entirety of the binary search tree 
+    
+    //how do we wish to traverse this tree? - imma go with bfs 
+    const queue = [root];
+    var values = [];    
+    
+    while (queue.length) {
+        const curr = queue.shift();
+        values.push(curr.val);
+        if (curr.left) queue.push(curr.left);
+        if (curr.right) queue.push(curr.right);
+    };
+    
+    //hold all of the values within an arr 
+    
+    //iterate through the arr and see if any two numbers add up to the value 
+    
+    //how exactly do we iterate through this arr? begin with the first ele and check it as a pair with every other ele if last ele simply stop 
+    
+    for (let i = 0; i < values.length; i++) {
+        for (let j = i+1; j < values.length; j++) {
+            if (values[i] + values[j] === k) return true;
+        };
+    };
+    
+    return false;
+    
+    //nested for loop tho so it wil lbe kinda slow 
+    
+    
+};
