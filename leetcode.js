@@ -2184,3 +2184,40 @@ var binaryTreePaths = function(root) {
     
     //since we are just traversing the entirety of the tree, o n where n is the num of nodes of the tree 
 };
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var deepestLeavesSum = function(root) {
+    
+    let queue = [root],
+        deepestSum;
+    
+    while (queue.length) {
+        let next = [];
+        let lvlSum = 0;
+        
+        for (const node of queue) {
+            lvlSum += node.val
+            
+            if (node.left) next.push(node.left);
+            if (node.right) next.push(node.right);
+        };
+        
+        deepestSum = lvlSum;
+        queue = next;
+    }
+    
+   return deepestSum;
+};
+
+//time complexity is o(n) we must traverse through every node and through each lvl
