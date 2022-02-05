@@ -2151,3 +2151,36 @@ var treeSum = root => {
     //traverse bfs style and increase sum for each node and then return sum 
     return sum; 
 }
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {string[]}
+ */
+var binaryTreePaths = function(root) {
+    var paths = [];
+    
+    const helper = (root, path) => {
+        if (!root) return 
+        
+        const newPath = path.concat(root.val);
+        
+        if (!root.left && !root.right) paths.push(newPath);
+        
+        helper(root.left, newPath);
+        helper(root.right, newPath);
+    }
+    
+    helper(root, []);
+
+    return paths.map(path => path.join('->'));
+    
+    //since we are just traversing the entirety of the tree, o n where n is the num of nodes of the tree 
+};
