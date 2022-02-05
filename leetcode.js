@@ -2076,3 +2076,78 @@ var findTarget = function(root, k) {
     
     
 };
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var findTilt = function(root) {
+    if (!root) return 0;
+    //init a variable sum that keeps track of the sum 
+    let tilt = 0;
+    //find the sum of the left and right subtrees 
+    
+    //need a helper function to help traverse the tree using dfs and then apply tree sum to the tree's children and then make changes to tilt 
+    
+    let queue = [root];
+    
+    while (queue.length) {
+        let curr = queue.shift();
+        
+        let left = curr.left;
+        let right = curr.right;
+        
+        //find the sub tree sum 
+        
+        let leftSum = treeSum(left);
+        let rightSum = treeSum(right);
+        
+        let absolute = Math.pow(Math.pow((leftSum - rightSum), 2), .5);
+        tilt += absolute;
+        
+        if (left) queue.push(left);
+        if (right) queue.push(right);
+    };
+    
+    //make a helper function to find the sum of any subtree 
+    
+    //traverse the tree with dfs and apply this helper to every subtree of the nodes we traverse
+    
+    
+    return tilt;
+};
+
+//time complexity - we need to traverse through every node and for each node we even need to traverse through every subtree of the tree 
+
+//say the length of the tree is t then we progressively traverse thru less and less nodes 
+
+//its more than t but not quite t^2 as that would mean that for every node we would traverse through the entire t so between t and t^2 maybe tlogt?
+
+
+
+
+var treeSum = root => {
+    if (!root) return 0;
+    //to find the sum of the values of a binary tree 
+    
+    let queue = [root],
+        sum = 0;
+    
+    //use a queue and init a sum variable 
+    while (queue.length) {
+        const curr = queue.shift();
+        sum += curr.val;
+        if (curr.left) queue.push(curr.left);
+        if (curr.right) queue.push(curr.right);
+    }
+    //traverse bfs style and increase sum for each node and then return sum 
+    return sum; 
+}
