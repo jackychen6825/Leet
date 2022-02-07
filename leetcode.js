@@ -2221,3 +2221,34 @@ var deepestLeavesSum = function(root) {
 };
 
 //time complexity is o(n) we must traverse through every node and through each lvl
+
+/**
+ * @param {number[]} nums
+ * @return {SparseVector}
+ */
+var SparseVector = function(nums) {
+    this.values = nums;
+};
+
+// Return the dotProduct of two sparse vectors
+/**
+ * @param {SparseVector} vec
+ * @return {number}
+ */
+SparseVector.prototype.dotProduct = function(vec) {
+    var sum = 0;
+    
+    for (let i = 0; i < vec.values.length; i++) {
+        
+        let val1 = this.values[i];
+        let val2 = vec.values[i];
+        sum += (val1 * val2);
+    };
+    
+    return sum;
+};
+
+// Your SparseVector object will be instantiated and called as such:
+// let v1 = new SparseVector(nums1);
+// let v2 = new SparseVector(nums2);
+// let ans = v1.dotProduct(v2);
