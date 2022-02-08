@@ -2252,3 +2252,62 @@ SparseVector.prototype.dotProduct = function(vec) {
 // let v1 = new SparseVector(nums1);
 // let v2 = new SparseVector(nums2);
 // let ans = v1.dotProduct(v2);
+
+
+/**
+ * @param {string} homepage
+ */
+var BrowserHistory = function(homepage) {
+   this.default = [homepage]
+    this.idx = 0 
+};
+
+/** 
+ * @param {string} url
+ * @return {void}
+ */
+BrowserHistory.prototype.visit = function(url) {
+    if (this.idx !== this.default.length-1) {
+        this.default = this.default.slice(0, this.idx+1);
+    }
+    
+    this.default.push(url);
+    this.idx++ //increment the index 
+};
+
+/** 
+ * @param {number} steps
+ * @return {string}
+ */
+BrowserHistory.prototype.back = function(steps) {
+    //num of steps one can move back = this.idx;
+    if (this.idx < steps) {
+        this.idx = 0 
+    } else {
+        this.idx = this.idx - steps;
+    }
+    
+    return this.default[this.idx];
+};
+
+/** 
+ * @param {number} steps
+ * @return {string}
+ */
+BrowserHistory.prototype.forward = function(steps) {
+    if (this.default.length-1 - this.idx < steps) {
+        this.idx = this.default.length-1
+    } else {
+        this.idx = this.idx + steps;
+    }
+    
+    return this.default[this.idx];
+};
+
+/** 
+ * Your BrowserHistory object will be instantiated and called as such:
+ * var obj = new BrowserHistory(homepage)
+ * obj.visit(url)
+ * var param_2 = obj.back(steps)
+ * var param_3 = obj.forward(steps)
+ */
