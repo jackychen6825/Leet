@@ -2376,3 +2376,46 @@ var addTwoNumbers = function(l1, l2) {
     return result.next;
     
 };
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function(s) {
+    
+    //find all substrings and compare length if no repeats 
+    
+    let longestSubstring = "";
+    
+    for (let i = 0; i < s.length; i++) {
+        for (let j = i+1; j <= s.length; j++) {
+            const substring = s.slice(i, j);
+            const isValid = repeats(substring);
+            
+            if (isValid && substring.length > longestSubstring.length) longestSubstring = substring;
+        }
+    }
+    
+    
+    return longestSubstring.length;
+};
+
+//helper function to determine if a string has characters that repeat
+
+var repeats = function(string) {
+    //iterate through the string and keep track of the values within a map 
+    
+    //if the value exist already return false 
+    
+    let map = new Map();
+    
+    for (let i = 0; i < string.length; i++) {
+        if (map.has(string[i])) {
+            return false;
+        } else {
+            map.set(string[i], true)
+        };
+    };
+    
+    return true;
+};
