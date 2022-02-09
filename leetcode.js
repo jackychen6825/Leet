@@ -2419,3 +2419,31 @@ var repeats = function(string) {
     
     return true;
 };
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function(s) {
+    const map = new Map();
+    
+    //sliding window begins at 0 for left and right 
+    let left = 0, 
+        right = 0;
+    
+    let longestLen = 0;
+    
+    while (right < s.length) {
+        if (!map.has(s[right])) {
+            map.set(s[right], true);
+            let len = map.size
+            if (len > longestLen) longestLen = len;
+            right++
+        } else {
+            //the map includes the character so move the left side over one until it no longer contains the repeated char 
+            map.delete(s[left++])
+        };
+    };
+    
+    return longestLen;
+};
