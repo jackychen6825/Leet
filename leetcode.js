@@ -2717,3 +2717,87 @@ var backspaceCompare = function(s, t) {
     
     return sStack.join("") === tStack.join("")
 };
+
+var last = arr => arr[arr.length-1]
+
+
+var MaxStack = function() {
+    this._stack = []
+    this._max = []
+};
+
+/** 
+ * @param {number} x
+ * @return {void}
+ */
+MaxStack.prototype.push = function(x) {
+    this._stack.push(x)
+    
+    if (this._max.length === 0) {
+        this._max.push(x)
+        return;
+    }
+    
+    if (x >= last(this._max)) {
+        this._max.push(x);
+    };
+};
+
+/**
+ * @return {number}
+ */
+MaxStack.prototype.pop = function() {
+    const currMax = last(this._max)
+    const popped = this._stack.pop()
+    if (popped === currMax) {
+        this._max.pop()
+    }
+    return popped
+};
+
+/**
+ * @return {number}
+ */
+MaxStack.prototype.top = function() {
+    return last(this._stack)
+};
+
+/**
+ * @return {number}
+ */
+MaxStack.prototype.peekMax = function() {
+    return last(this._max)
+};
+
+/**
+ * @return {number}
+ */
+MaxStack.prototype.popMax = function() {
+    const max = this._max.pop();
+    const temp = []
+    
+    for (let i = this._stack.length-1; i >= 0; i--) {
+        if (this._stack[i] === max) {
+            this._stack.splice(i, 1)
+            break;
+        } else {
+            temp.push(this._stack.pop())
+        }
+    }
+    
+    while(temp.length) {
+        this.push(temp.pop())
+    }
+    
+    return max;
+};
+
+/** 
+ * Your MaxStack object will be instantiated and called as such:
+ * var obj = new MaxStack()
+ * obj.push(x)
+ * var param_2 = obj.pop()
+ * var param_3 = obj.top()
+ * var param_4 = obj.peekMax()
+ * var param_5 = obj.popMax()
+ */
