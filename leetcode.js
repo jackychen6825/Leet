@@ -2687,3 +2687,33 @@ MinStack.prototype.getMin = function() {
  * var param_3 = obj.top()
  * var param_4 = obj.getMin()
  */
+
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+var backspaceCompare = function(s, t) {
+    //iterate through the str and place the values on a stack if the curr char is a # pop off from the stack otherwise push to the stack finally when iterations are complete ie traversed the entire strings return the values and compare 
+    
+    const sStack = [],
+          tStack = [];
+    
+    s.split('').forEach(val => {
+        if (val === '#') {
+            sStack.pop();
+        } else {
+            sStack.push(val);
+        };
+    });
+    
+    t.split('').forEach(val => {
+        if (val === '#') {
+            tStack.pop();
+        } else {
+            tStack.push(val);
+        };
+    });
+    
+    return sStack.join("") === tStack.join("")
+};
