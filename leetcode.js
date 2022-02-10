@@ -2801,3 +2801,48 @@ MaxStack.prototype.popMax = function() {
  * var param_4 = obj.peekMax()
  * var param_5 = obj.popMax()
  */
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {number[]} nums
+ * @return {TreeNode}
+ */
+var constructMaximumBinaryTree = function(nums) {
+    
+    //derive the maximum value and its index 
+    
+    //find the left and right sub arrays 
+    
+    //instantiate a new tree node with the max val 
+    
+    //do recursive call on the left and right sides (subarrays)
+    
+    //must return tree node but base case would be if arr is empty which case return null 
+    
+    if (!nums.length) return null; 
+    
+    let max = -Infinity, 
+        idx;
+    nums.forEach((num, i) => {
+        if (num > max) {
+            max = num;
+            idx = i;
+        };
+    });
+    
+    const left = nums.slice(0, idx);
+    const right = nums.slice(idx+1);
+    
+    const newNode = new TreeNode(max);
+    newNode.left = constructMaximumBinaryTree(left)
+    newNode.right = constructMaximumBinaryTree(right)    
+    return newNode;
+    
+};
