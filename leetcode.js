@@ -2447,3 +2447,38 @@ var lengthOfLongestSubstring = function(s) {
     
     return longestLen;
 };
+
+/**
+ * @param {string} s
+ * @return {number[]}
+ */
+var partitionLabels = function(s) {
+    var lastIndexes = {};
+    
+    for (let i = s.length-1; i >= 0; i--) {
+        const char = s[i];
+        if (!lastIndexes[char]) {
+            lastIndexes[char] = i;
+        };
+    };
+    
+    let partitions = [],
+        end = 0,
+        start = 0;
+    
+    for (let i = 0; i < s.length; i++) {
+        const char = s[i];
+        
+        if (lastIndexes[char] > end) end = lastIndexes[char];
+        
+        if (end === i) {
+            //make partition 
+            partitions.push(end - start + 1);
+            start = i+1;
+            //end does not need to change here 
+        };
+    };
+    
+    return partitions;
+    
+};
