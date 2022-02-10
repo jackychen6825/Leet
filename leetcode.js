@@ -2482,3 +2482,26 @@ var partitionLabels = function(s) {
     return partitions;
     
 };
+
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var permute = function(nums) {
+    var res = [];
+    
+    var permutations = (perm = [], remaining = nums) => {
+        if (remaining.length === 0) {
+            res.push(perm);
+            return; //when there is nothing remaining just push in the curr. permutation
+        };
+
+        for (const num of remaining) {
+            permutations([...perm, num], remaining.filter(val => val !== num))
+        };
+    }
+
+    permutations();
+    return res;
+};
+
