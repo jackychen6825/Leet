@@ -2625,3 +2625,65 @@ MyStack.prototype.empty = function() {
  * var param_3 = obj.top()
  * var param_4 = obj.empty()
  */
+
+var last = function(arr) {
+    return arr[arr.length-1]; //just return the last element of this arr 
+};
+
+//we need to pair the curr min to the right of the curr val 
+var MinStack = function() {
+    this._stack = [];
+};
+
+/** 
+ * @param {number} val
+ * @return {void}
+ */
+MinStack.prototype.push = function(val) {
+    
+    //when the stack is empty 
+    if (this._stack.length === 0) {
+        this._stack.push([val, val]);
+        return; //return to end the process right here 
+    }; //since there are no other elements, the val must be the minimum value no? 
+    
+    //otherwise we need to find the curr min 
+    const currMin = last(this._stack)[1]; //return sthe curr min value
+    if (val < currMin) {
+        this._stack.push([val, val])
+    } else {
+        //here it must be that val > curr min so maintain the curr min 
+        this._stack.push([val, currMin])
+    };
+    
+};
+
+/**
+ * @return {void}
+ */
+MinStack.prototype.pop = function() {
+    this._stack.pop();
+};
+
+/**
+ * @return {number}
+ */
+MinStack.prototype.top = function() {
+    return last(this._stack)[0];
+};
+
+/**
+ * @return {number}
+ */
+MinStack.prototype.getMin = function() {
+    return last(this._stack)[1];
+};
+
+/** 
+ * Your MinStack object will be instantiated and called as such:
+ * var obj = new MinStack()
+ * obj.push(val)
+ * obj.pop()
+ * var param_3 = obj.top()
+ * var param_4 = obj.getMin()
+ */
