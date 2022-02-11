@@ -2846,3 +2846,44 @@ var constructMaximumBinaryTree = function(nums) {
     return newNode;
     
 };
+
+/**
+ * @param {number} size
+ */
+var MovingAverage = function(size) {
+    this.size = size;
+    this.values = []
+};
+
+/** 
+ * @param {number} val
+ * @return {number}
+ */
+MovingAverage.prototype.next = function(val) {
+    //push the values into the values arr 
+    this.values.push(val);
+    //determine the len of value arr
+    const len = this.values.length;
+    //determine the divisor based on the length 
+    let divisor = Math.min(len, this.size)
+    
+    let sum = 0,
+        count = 0
+    
+    //grab the last three values of the arr 
+    for (let i = this.values.length-1; i >= 0; i--) {
+        if (count === divisor) break;
+        const val = this.values[i];
+        count++ 
+        sum += val
+    }
+    
+    return sum / divisor;
+    
+};
+
+/** 
+ * Your MovingAverage object will be instantiated and called as such:
+ * var obj = new MovingAverage(size)
+ * var param_1 = obj.next(val)
+ */
