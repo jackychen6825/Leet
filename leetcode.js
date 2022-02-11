@@ -2918,3 +2918,37 @@ MovingAverage.prototype.next = function(val) {
  * var obj = new MovingAverage(size)
  * var param_1 = obj.next(val)
  */
+
+//begin the class with an arr 
+//arr with begin with time (t) = 0
+//simply store t within an arr and then iterate through arr for. each ping request and return the values inclusive with a counter 
+
+
+var RecentCounter = function() {
+    this.requests = [];
+};
+
+/** 
+ * @param {number} t
+ * @return {number}
+ */
+RecentCounter.prototype.ping = function(t) {
+    this.requests.push(t);
+    
+    //create the range here 
+    const lowerBound = t-3000;
+    // const upperBound = t
+    
+    let count = 0;
+    this.requests.forEach(ping => {
+        if (ping >= lowerBound && ping <= t) count++;
+    });
+    
+    return count;
+};
+
+/** 
+ * Your RecentCounter object will be instantiated and called as such:
+ * var obj = new RecentCounter()
+ * var param_1 = obj.ping(t)
+ */
