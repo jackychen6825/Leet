@@ -3012,3 +3012,62 @@ var firstUniqChar = function(s) {
     
     return queue.length ? original.indexOf(queue[0]): -1
 };
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} original
+ * @param {TreeNode} cloned
+ * @param {TreeNode} target
+ * @return {TreeNode}
+ */
+
+var getTargetCopy = function(original, cloned, target) {
+    //we are given a target node from the original tree 
+    
+    //then we are given the cloned tree and need to get the reference to the same node in the cloned tree 
+    
+    //first we need to determine where in the original tree the target node is located 
+    
+    //how do we determine that? 
+    
+    //iterate through the tree in breadth first search fashion 
+    
+    //each time you shift out a tree node  from the queue, increment a counter variable 
+    
+    //when you find the target node within the original tree return the counter variable 
+    
+    //do the same approach for the cloned tree except each time we shift out a tree we decrement the counter variable when the counter hits 0 that node is the reference to the same node in the cloned tree 
+    
+    const originalQueue = [original];
+    var originalCounter = 0;
+    
+    while (originalQueue.length) {
+        let currNode = originalQueue.shift();
+        originalCounter++;
+        
+        if (currNode === target) break;
+        
+        if (currNode.left) originalQueue.push(currNode.left);
+        if (currNode.right) originalQueue.push(currNode.right);
+    };
+    
+    const clonedQueue = [cloned];
+    var clonedCounter = originalCounter;
+    
+    while (clonedQueue.length) {
+        let currNode = clonedQueue.shift();
+        clonedCounter--;
+        
+        if (clonedCounter === 0) return currNode;
+        if (currNode.left) clonedQueue.push(currNode.left)
+        if (currNode.right) clonedQueue.push(currNode.right)
+    };
+    
+    
+};
