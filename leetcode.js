@@ -2982,3 +2982,33 @@ var timeRequiredToBuy = function(tickets, k) {
     
     return time;
 };
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var firstUniqChar = function(s) {
+    //how would we do this with a queue? 
+    
+    //for each char we push it to the back and if we find another char of the same value, we just remove it? in the end we jsut return the element at the beginning of the queue and only need to iterate through the str once? goddam sheesh this is fun lol
+    
+    const queue = [],
+          removed = [];
+    
+    const original = s.split('') //turning into an arr for iterating fam 
+    
+    original.forEach(char => {
+        //if both the queue and removed char arr doesn have this bitch then add it 
+        if (!queue.includes(char) && !removed.includes(char)) {
+            queue.push(char);
+        } else {
+            const idx = queue.indexOf(char);
+            if (idx > -1) {
+                queue.splice(idx, 1);    
+            };
+            removed.push(char);
+        };
+    });
+    
+    return queue.length ? original.indexOf(queue[0]): -1
+};
