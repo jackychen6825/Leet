@@ -2952,3 +2952,33 @@ RecentCounter.prototype.ping = function(t) {
  * var obj = new RecentCounter()
  * var param_1 = obj.ping(t)
  */
+
+/**
+ * @param {number[]} tickets
+ * @param {number} k
+ * @return {number}
+ */
+var timeRequiredToBuy = function(tickets, k) {
+    // //if a value within the arr becomes zero remove that value from the arr 
+    // we can iterate through the arr and decrement each element by 1 while increasing the count for each time we decrement, then when any value is 0 we simply keep the value to perserve the index however if we iterate over a zero we will just ignore it, we keep doing this until the value at the kth index is zero this will be o n when we remove everything so not bad 
+    
+    var time = 0;
+    while (tickets[k] !== 0) {
+        for (let i = 0; i < tickets.length; i++) {
+            const val = tickets[i];
+            
+            //the issue is even tho this individual has completed, the for loop continues 
+            
+            //so for every iteration we need to check if the specified person has purchased allof his tickets already 
+            if (tickets[k] === 0) break; //this really aint that fast lmao
+            
+            if (val !== 0) {
+                //decrement val and increment counter 
+                tickets[i] = val-1;
+                time++;
+            } 
+        };
+    };
+    
+    return time;
+};
