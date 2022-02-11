@@ -3131,3 +3131,73 @@ var sumEvenGrandparent = function(root) {
 
     
 //dfs traversal
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+var bstToGst = function(root) {
+    //given a binary search tree 
+    
+    //1.left subtree only has vals that are smaller than the curr node 
+    
+    //2. right subtree only has vals that are greater than the curr node 
+    
+    //3. both left and right subtrees are also bst
+    
+    //iterate through the tree in inorder fasion so go through the left subtree and then the curr node and then the right subtree 
+    
+    //each time simply just add the node to an arr 
+    
+    //thus the nodes will be arranged from smallest to largest 
+    
+    //example [smallest ... largest]
+    
+    //then we initialize a variable say currSum = 0 
+    
+    //iterate from the back of the subtree and we say 
+    
+    //hold the node val 
+    
+    //node.val += currSum 
+    
+    //increase curr sum 
+    
+    //then for node 7, currsum is 8 we change the value from 7 -> 15 because node.val + currsum = 15 and we keep doing this until the array has been iterate through in reverse order
+    
+    //return the root;
+    
+    var inOrderArr = [];
+    
+    var helper = node => {
+        //we want to traverse the tree in inorder fashion 
+        
+        if (!node) return;
+        
+        helper(node.left);
+        inOrderArr.push(node);
+        helper(node.right);
+    };
+    
+    helper(root);
+    
+    let currSum = 0;
+    
+    for (let i = inOrderArr.length-1; i >= 0; i--) {
+        const curr = inOrderArr[i];
+        const store = curr.val;
+        curr.val += currSum;
+        currSum += store;
+    };
+    
+    return root;
+    
+};
