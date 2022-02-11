@@ -3071,3 +3071,63 @@ var getTargetCopy = function(original, cloned, target) {
     
     
 };
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var sumEvenGrandparent = function(root) {
+    //return the sum of the values of all node with even-valued grandparents 
+    
+    //so for each node we traverse through we simultaneously need to know its grandparent eh
+    
+    //how do we do this?
+    
+    //using a breadth first traversal we can get each level and level.i must be the grand parent of left i + 2 but we cant really tell who is the grand parent and which are the grand children so that wouldnt work 
+    
+    //since this is a binary tree, a node can have at most two children and four grand children 
+    
+    //we can iterate through each node using dfs and check its value, if it's even, then we find its grandchildren and add their values to the sum otherwise we keep traversing ok
+    
+    //lets make a helper function to find its grand chlildren and then just apply this helper function conditionally. to each node dfs style 
+    
+    const queue = [root];
+    var sum = 0;
+    
+    var helper = (node) => {
+        if (node.val % 2 !== 0) return; 
+
+        const children = [];
+        if (node.left) children.push(node.left);
+        if (node.right) children.push(node.right);
+
+        children.forEach(child => {
+            if (child.left) sum += child.left.val;
+            if (child.right) sum += child.right.val;
+        });
+    };
+    
+    while (queue.length) {
+        const curr = queue.shift();
+        helper(curr);
+        if (curr.left) queue.push(curr.left)
+        if (curr.right) queue.push(curr.right)
+    }
+    
+    return sum;
+};
+
+//create helper function here 
+
+//given a node, find its grandchilden and add value to the sum if even otherwise ignore 
+
+    
+//dfs traversal
