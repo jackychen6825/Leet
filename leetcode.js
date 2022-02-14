@@ -3234,3 +3234,59 @@ OrderedStream.prototype.insert = function(idKey, value) {
  * var obj = new OrderedStream(n)
  * var param_1 = obj.insert(idKey,value)
  */
+
+/**
+ * @param {number[]} arr
+ * @return {number}
+ */
+var sumOddLengthSubarrays = function(arr) {
+    
+    //use a pointer method 
+    
+    //[1 4 2 5 3]
+    
+    //start = 0 
+    
+    //end = 0
+    
+    //width = 1
+    
+    //while loop that loops until the width is greater than the len of the arr 
+    
+    //if end is greater than the len of the arr then we reset the start and end pointers with a new width ie width += 2
+    
+    let end = 0, 
+        width = 0;
+    
+    let oddSubArrs = []; //will be an array of arrays 
+    
+    while (width <= arr.length) {
+        for (let i = 0; i < arr.length; i++) {
+            //setting the end of the sub arr 
+            end = i + width + 1;
+            if (end > arr.length) break; 
+            //since the sub arr is valid simply push into the container of arrays and end 
+            const subArr = arr.slice(i, end);
+            oddSubArrs.push(subArr);
+        };
+        
+        //reset variables 
+        width += 2;
+        end = 0; 
+    }; 
+    
+    //above loop should execute until width exceeds the length of the entire arr 
+    
+    //oddSubArrs will now contain all possible sub arrays
+    let sum = 0;
+    oddSubArrs.forEach(sub => {
+        sub.forEach(val => sum += val);
+    });
+    
+    return sum;
+    
+};
+
+//we need to keep iteration over the arr so that would be o(n) becaus we remove the coefficients 
+
+//we  then iterate over all subarrays 
