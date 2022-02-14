@@ -3401,3 +3401,92 @@ var truncateSentence = function(s, k) {
     let truncatedSentence = sentenceArr.slice(0, k);
     return truncatedSentence.join(" ");
 };
+
+/**
+ * @param {number} n
+ * @return {number[]}
+ */
+var sumZero = function(n) {
+    
+    var map = new Map(); 
+    
+    var getTwoSumFromNum = num => {
+        for (let i = 1; i < num; i++) {
+            const first = i;
+            const last = num-i; 
+            if (!map.has(first) && !map.has(last)) return [first * -1, last * -1]; 
+        };
+    };
+    
+    //essentially generate n numbers that sum up to zero 
+    
+    //math.random function returns a value betwen (0, 1) 
+    
+    //if we want it to generate a larger range we can just multiple the res by n where n is the maximum 
+    
+    //ie 0.45 * 10 = 4.5 etc..
+    
+    //this is precisely what we need to do here 
+    
+    //along with the constraint that the summust be zero 
+    
+    //to acheive a sum of zero every two numbers we can just add the positive and negative vals of that num ie magnitude 
+    
+    //thats when n is even what about when n is odd? 
+    
+    //create a helper function that finds two values that sum up to the given input? 
+    
+    //how do we know that the two values we return are not repeated within the arr ?
+    
+    //given an input and the arr 
+    
+    //each time to add a value to the arr we also need to add it to a hash map for constant lookup time innit 
+    if (n === 1) return [0];
+    
+    if (n % 2 === 0) {
+        const response = [];
+        while (response.length !== n) {
+            const pos = Math.floor(Math.random() * n); 
+            const neg = pos * -1;
+            if (!map.has(pos)) {
+                map.set(pos, true);
+                response.push(pos, neg);
+            };
+        };
+        
+        return response;
+        
+    } else {
+        const response = [];
+        while (response.length !== n-3) {
+            const pos = Math.floor(Math.random() * n); 
+            const neg = pos * -1;
+            if (!map.has(pos)) {
+                map.set(pos, true);
+                response.push(pos, neg);
+            };
+        };
+        
+        let generateVal = true 
+        
+        while (generateVal) {
+            generateVal = false;
+            const pos = Math.floor(Math.random() * n); 
+            if (!map.has(pos)) {
+                map.set(pos, true);
+                response.push(pos);
+            } else {
+                generateVal = true;
+            };
+        };
+        
+        const [neg1, neg2] = getTwoSumFromNum(response[response.length-1]);
+        response.push(neg1, neg2)
+        
+        return response;
+    }
+    
+    
+    //given a map and a num return values where the sum of the values = num 
+   
+};
