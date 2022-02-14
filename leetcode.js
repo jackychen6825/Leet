@@ -3331,3 +3331,32 @@ var anagramMappings = function(nums1, nums2) {
 //iterating through nums2 once to create the map so thats o(n) where n is the lenof nums 2
 //iterating through nums1 to get theindex and push in mappings o(m) where m is the len of nums 1
 //totoal time complexity = o(m + n);
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxProductDifference = function(nums) {
+    //return the maximum product difference between two pairs of numbers 
+    
+    //maximized the product on one side - iterate through the arry and find the two largest values 
+    
+    //minmize the product on the other end - iteratethrough the arr and find the two smallest values 
+    
+    //cant we just sort nums 
+    
+    let sorted = nums.sort((a, b) => a-b); 
+    let min1, min2, max1, max2;
+    
+    min1 = sorted[0]
+    min2 = sorted[1]
+    
+    max1 = sorted[sorted.length-1]
+    max2 = sorted[sorted.length-2]
+    
+    // console.log(sorted)
+    
+    return (max1 * max2) - (min1 * min2)
+    
+    
+};
