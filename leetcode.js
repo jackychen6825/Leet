@@ -3290,3 +3290,44 @@ var sumOddLengthSubarrays = function(arr) {
 //we need to keep iteration over the arr so that would be o(n) becaus we remove the coefficients 
 
 //we  then iterate over all subarrays 
+
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var anagramMappings = function(nums1, nums2) {
+    
+    //an anagram is when the other arr is comprised of the same values but in a randomized manner 
+    
+    //return a mappings (arr) where mappings[i] is the jth position of the ith value of num1 
+    
+    ///iterate through nums 2 and create a hash map each key will be the value and each value will be thejth index at which the values appears 
+    
+    //iterate through nums1 and the value at the ith index will be mapped to the hash map ie key and then reutrn the value within the mappings arr 
+    
+    const mappings = [];
+    const map = new Map();
+    
+    nums2.forEach((num, idx) => {
+        if (map.has(num)) {
+            //do nothing since there already is an idex there 
+        } else {
+            //create the new key value pair with the value and idx 
+            map.set(num, idx);
+        };
+    });
+    
+    //iterate through nums1 find the mapping and return mappins arr 
+    nums1.forEach(num => {
+        const index = map.get(num);
+        mappings.push(index);
+    });
+    
+    
+    return mappings;
+};
+
+//iterating through nums2 once to create the map so thats o(n) where n is the lenof nums 2
+//iterating through nums1 to get theindex and push in mappings o(m) where m is the len of nums 1
+//totoal time complexity = o(m + n);
