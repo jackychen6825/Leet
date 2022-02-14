@@ -3567,3 +3567,40 @@ var findSmallestDiff = (arr1, arr2) => {
     
     return smallestDiff;
 }
+
+/**
+ * @param {string[]} words
+ * @return {string[]}
+ */
+var stringMatching = function(words) {
+    
+    //we need to find the words within the words arr that are substrings of other words 
+    
+    //words[i] is a substring of words[j] 
+    
+    //lets sort the array in ascening length order 
+    
+    //a word can only be a substring of another substring if the next word is longer than it 
+    
+    //hence ['1', '12', '123']means that words[i] can only be a substring of words[i+x] if words[i+x] is longer 
+    
+    //after sorting, we iterate through each word and for each word iterate through subsequent words 
+    
+    const sorted = words.sort((a, b) => a.length - b.length);
+    // console.log(sorted)
+    
+    const answer = [];
+    
+    for (let i = 0; i < sorted.length; i++) {
+        const word = sorted[i];
+        for (let j = i+1; j < sorted.length; j++) {
+            if (sorted[j].includes(word)) {
+                answer.push(word);
+                //only need to push word once even though one particular word could be a substring to mut=ltiple other words hence
+                break;
+            }
+        };
+    };
+    
+    return answer;
+};
