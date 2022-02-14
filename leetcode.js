@@ -3360,3 +3360,23 @@ var maxProductDifference = function(nums) {
     
     
 };
+
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var targetIndices = function(nums, target) {
+    
+    //sort nums 
+    
+    //iterate through nums using for loop if val @ that point = target push to answer arr
+    const answer = [];
+    const sorted = nums.sort((a,b) => a-b);
+    for (let i = 0; i < sorted.length; i++) {
+        const value = sorted[i];
+        if (value === target) answer.push(i);
+    };
+    
+    return answer;
+};
