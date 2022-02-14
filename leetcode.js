@@ -3515,3 +3515,55 @@ var countBinarySubstrings = function(s) {
     
     
 };
+
+/**
+ * @param {string[]} wordsDict
+ * @param {string} word1
+ * @param {string} word2
+ * @return {number}
+ */
+var shortestDistance = function(wordsDict, word1, word2) {
+    
+    //there can be cases where there are repeated words so we must find the all the indices of word1 and word2
+    
+    //afterwards we are left with two arrays that contain all the indices at which. word1 and word2 appears 
+    
+    //we need to find the smallest diff between the two arrays 
+    
+    let map = {}
+    for (let i = 0; i < wordsDict.length; i++) {
+        if (!map[wordsDict[i]]) {
+            map[wordsDict[i]] = [i];
+        } else {
+            map[wordsDict[i]].push(i);
+        };
+    };
+    
+    let indices1 = map[word1];
+    let indices2 = map[word2];
+    
+    // console.log(indices1, indices2)
+    
+    const smallestDelta = findSmallestDiff(indices1, indices2);
+    return smallestDelta
+};
+
+//example [1 2 14] [4 12 18]
+
+var findSmallestDiff = (arr1, arr2) => {
+    
+    let smallestDiff = Infinity;
+    
+    for (let i = 0; i < arr1.length; i++) {
+        const idx1 = arr1[i];
+        for (let j = 0; j < arr2.length; j++) {
+            const idx2 = arr2[j];
+            let diff = idx1 - idx2;
+            let absoluteDiff = Math.pow(Math.pow(diff, 2), 0.5)
+            // console.log(absoluteDiff)
+            if (absoluteDiff < smallestDiff) smallestDiff = absoluteDiff;
+        };
+    };
+    
+    return smallestDiff;
+}
