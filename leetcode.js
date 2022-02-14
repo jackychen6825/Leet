@@ -3380,3 +3380,24 @@ var targetIndices = function(nums, target) {
     
     return answer;
 };
+
+/**
+ * @param {string} s
+ * @param {number} k
+ * @return {string}
+ */
+var truncateSentence = function(s, k) {
+    //we receive a sentence with s numberof words 
+    
+    //return the sentence with only k number of words 
+    
+    //turn sentence into an arr 
+    
+    //slice array 
+    
+    //return joined array 
+    
+    const sentenceArr = s.split(" ");
+    let truncatedSentence = sentenceArr.slice(0, k);
+    return truncatedSentence.join(" ");
+};
