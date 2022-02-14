@@ -3201,3 +3201,36 @@ var bstToGst = function(root) {
     return root;
     
 };
+
+/**
+ * @param {number} n
+ */
+var OrderedStream = function(n) {
+    this.stream = new Array(n);
+    this.pos = 0;
+};
+
+/** 
+ * @param {number} idKey 
+ * @param {string} value
+ * @return {string[]}
+ */
+OrderedStream.prototype.insert = function(idKey, value) {
+    //replace the array val at idKey with value 
+    this.stream[idKey-1] = value;
+    
+    //need to return the longest possible arr 
+    let response = [];
+    while(this.pos < this.stream.length && this.stream[this.pos]) {
+        response.push(this.stream[this.pos]);
+        this.pos++;
+    };
+    
+    return response;
+};
+
+/** 
+ * Your OrderedStream object will be instantiated and called as such:
+ * var obj = new OrderedStream(n)
+ * var param_1 = obj.insert(idKey,value)
+ */
