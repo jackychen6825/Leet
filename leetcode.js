@@ -3604,3 +3604,43 @@ var stringMatching = function(words) {
     
     return answer;
 };
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} val
+ * @return {ListNode}
+ */
+var removeElements = function(head, val) {
+    
+    if (!head) return null;
+    
+    let prev = head,
+        curr = head.next;
+    
+    while (curr) {
+        if (curr.val === val) {
+            const next = curr.next?.val;
+            if (next !== val) {
+                prev.next = curr.next;
+                prev = curr.next;
+                curr = curr.next?.next;
+            }  else {
+                curr = curr.next;
+            };
+        } else {
+            prev = prev.next;
+            curr = curr.next;
+        }
+    };
+    
+    if (head.val === val) return head.next
+    return head;
+    
+};
