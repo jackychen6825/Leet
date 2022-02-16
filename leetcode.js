@@ -3644,3 +3644,39 @@ var removeElements = function(head, val) {
     return head;
     
 };
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var sortLinkedList = function(head) {
+    
+    //can i not just iterate through the linked list grab each node put it in an arry sort the arr based on node val connect the nodes and return? 
+    
+    let linkedList = [],
+        prev = null, 
+        curr = head;
+    
+    while (curr) {
+        prev = curr 
+        curr = curr.next;
+        prev.next = null;
+        linkedList.push(prev);
+    };
+    
+    
+    linkedList.sort((a, b) => a.val - b.val);
+    
+    for (let i = 0; i < linkedList.length-1; i++) {
+        linkedList[i].next = linkedList[i+1];
+    };
+    
+    return linkedList[0]
+};
