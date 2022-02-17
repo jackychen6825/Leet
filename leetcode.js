@@ -3680,3 +3680,41 @@ var sortLinkedList = function(head) {
     
     return linkedList[0]
 };
+
+/**
+ * @param {number[]} heights
+ * @return {number[]}
+ */
+var findBuildings = function(heights) {
+    
+//     we clearly do not want to check the other sub arrs for each building as that would be almost o(n^2) 
+    
+//     a building with an ocean view must be a building thats taller than all that comes before it 
+    
+//     hence we just need to determine at every step of the process if that building beginning from the back of the heights arr is a building with an. ocean view 
+    
+//     if it is a building with an ocean view, we pop it off the stack and compare to the next building, if the next building is taller, then it too must be a building with an ocean view otherwise it cannot be a building with an ocean view in which case we move on to the next part, we however dont really need to pop it off the stack simply note its index if the building is a building with. an. ocean view and return the indicies of the buildings with ocean. views
+    
+    let len = heights.length-1;
+    let tallest;
+    let answer =[];
+        
+    for (let i = len; i >= 0; i--) {
+        const currBuilding = heights[i]; //grab the height of each building for each iteration
+        
+        if (i === len) { //if its the last building, it must be the first iteration it must be the tallest and have ocean view 
+            tallest = currBuilding;
+            answer.push(len);
+        }
+        
+        //for other iterations, if the curr building ie curr iteration is taller than all that came before it it has an ocean view 
+        
+        if (currBuilding > tallest) {
+            answer.push(i);
+            tallest = currBuilding;
+        }
+    }
+    
+    answer.sort((a, b) => a-b);
+    return answer;
+};
