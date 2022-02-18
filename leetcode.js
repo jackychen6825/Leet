@@ -3821,3 +3821,50 @@ var minAddToMakeValid = function(s) {
 
 //time complexity o (n) we just need to iterate through the len of th string once 
 //space complexity o(n) we miht need to hold the entire str on the stack
+
+/**
+ * // Definition for a Node.
+ * function Node(val, children) {
+ *    this.val = val === undefined ? 0 : val;
+ *    this.children = children === undefined ? [] : children;
+ * };
+ */
+
+/**
+ * @param {Node|null} node
+ * @return {Node|null}
+ */
+var cloneTree = function(root) {
+    
+    //iterate through the binary tree 
+    
+    //recursive call making a new tree node at every step if there is a value there
+    
+    //return the newly made nodes 
+    
+    //done :3
+    
+    var helper = (root) => {
+        if (!root) return;
+        
+        //here there is a value so make a new tree node 
+        let dupVal = root.val;
+        let newNode = new Node(dupVal); 
+        
+        // console.log(newNode.children)
+        
+        //here we should make the recursive call? 
+        for (let child of root.children) {
+            newNode.children.push(helper(child));
+        }
+        
+        
+        //in the end we need to return the root node so 
+        return newNode;
+    };
+    
+    return helper(root)
+    
+    
+    
+};
