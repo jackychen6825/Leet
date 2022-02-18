@@ -3718,3 +3718,106 @@ var findBuildings = function(heights) {
     answer.sort((a, b) => a-b);
     return answer;
 };
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {number[]} preorder
+ * @return {TreeNode}
+ */
+var bstFromPreorder = function(preorder) {
+    
+    
+//     begin with the root node 8
+    
+//     move to the next item in preorder 5
+    
+//     since 5 < 8 check 8.left since null 8.left = 5 
+    
+//     tree 5 <- 8 
+    
+//     move to the next item 1 and reference tree since 1 < 8 check left 5 since 1 < 5 check left null since null set 1 to 5.left 
+    
+//     tree 1 <-- 5 <-- 8 
+    
+//     move to the next item 7 reference tree since 7 < 8 check left 5
+    
+//     since 7 greater than 5 check right null 
+    
+//     since null set 5.right to 7 
+    
+    
+    const headVal = preorder[0];
+    const root = new TreeNode(headVal); 
+    
+    const construct = (root, val) => {
+        if (!root) return null; 
+        
+        
+        if (val < root.val) {
+            if (root.left) {
+                construct(root.left, val)
+            } else {
+                const newNode = new TreeNode(val)
+                root.left = newNode;
+                return; 
+            };
+        } else {
+            if (root.right) {
+                construct(root.right, val)
+            } else {
+                const newNode = new TreeNode(val)
+                root.right = newNode;
+                return; 
+            }
+        }
+    }
+    
+    for (let i = 1; i < preorder.length; i++) {
+        const val = preorder[i];
+        construct(root, val);
+    };
+    
+    return root;
+};
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var minAddToMakeValid = function(s) {
+
+    // equal number of open and close parentheses? 
+        
+    const stack = [];
+    
+    for (let i = 0; i < s.length; i++) {
+        
+        let len = stack.length-1;
+        let curr = s[i];
+        let prev = stack[len];
+        
+        if (len < 0) {
+            stack.push(curr);
+            continue;
+        }
+        
+        if (curr === ')' && prev === '(') {
+            stack.pop()
+        } else {
+            stack.push(curr)
+        }
+    }
+    
+    
+    return stack.length;
+};
+
+//time complexity o (n) we just need to iterate through the len of th string once 
+//space complexity o(n) we miht need to hold the entire str on the stack
