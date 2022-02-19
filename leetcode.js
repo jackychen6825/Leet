@@ -3968,3 +3968,86 @@ var balanceBST = function(root) {
     return head;
     
 };
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {number} n
+ * @return {TreeNode[]}
+ */
+
+var solve = function(n,dp) { //dp is an array
+    
+    if(n % 2 === 0) return dp[n] = [] 
+    
+    if(dp[n] !== -1) return dp[n] 
+    
+    if(n === 1) return dp[n] = [new TreeNode(0)]
+    
+    let ans = []
+    
+    n = n - 1
+    
+    for(let ctr = 1 ; ctr < n ; ctr ++) {
+        
+        let left = solve(ctr,dp)
+        let right= solve(n-ctr,dp)
+        
+        for(let row = 0 ; row < left.length ; row ++)
+            for(let col = 0 ; col < right.length ; col ++) {
+                
+                const node = new TreeNode(0)
+                
+                node.left = left[row]
+                node.right= right[col]
+                
+                ans.push(node)
+                
+            }
+    }
+    
+    return dp[n] = ans
+    
+}
+
+var allPossibleFBT = function(n) {
+    let dp = new Array(n+1).fill(-1) //this is saying what we create a new arr with length n+1 
+    //we then fill the array with the values -1 why -1?
+    return solve(n,dp);
+};
+
+
+function longestPalindrome(string) {
+  // Write your code here.
+	let curLongest=[0,1]; //we'll exclude the rightmost index 
+	
+    for (let i =1;i<string.length;i++){ //iterate from the 1st letter of the string to the last lettr 
+		let odd = checkPalindrom(string,i-1,i+1); 
+		let even=checkPalindrom(string,i-1,i);
+		let longest = odd[1]-odd[0] > even[1]-even[0] ?odd:even
+		curLongest = curLongest[1]-curLongest[0] >longest[1]-longest[0] ? curLongest:longest
+	}
+
+	return string.slice(curLongest[0],curLongest[1])
+}
+
+
+//helper function to check if the string is a palindrome 
+const checkPalindrom = (string, leftIdx, rightIdx) => {
+    //we are given the string and the left and right indices 
+	while(leftIdx >=0 && rightIdx < string.length){ //condition keeps going whilst left idx is greater than 0 and right index is less than the length of the string so within the bounds of the string
+		if (string[leftIdx]!==string[rightIdx]){
+			break; //if the value on the left side does not equal the value on the right side break as its not a palindrome 
+		} else{
+			leftIdx--;
+			rightIdx++;
+		}
+	}
+	return [leftIdx+1,rightIdx] //returning the largest possible substring thats palindrome idxs for left and right 
+}
