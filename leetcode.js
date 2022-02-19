@@ -3868,3 +3868,103 @@ var cloneTree = function(root) {
     
     
 };
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+var balanceBST = function(root) {
+    
+    //a balanced bst means that the values are arranged in such a fashion 
+    
+    //given a node n the left values are smaller than n the right values are greater than n 
+    
+    //if we traverse through this bst in inorder fashion, we get a set of values in non-decreasing order ie 1 2 3 4 ... 
+    
+    //we can take this arr and construct a balanced bst 
+    
+    //question is how do we do so?
+    
+    //begin with the median? by defiinition, half the values of a set of numbers are greater than and half the values of a set of numbers are less than the median and such 
+    
+    //given the example [1 2 3 4]
+    
+    //we can derive the median say 3 in this case 
+    
+    //then we split the arr into two parts, the left part has values less than the median a lot like how the left subtree of a bst has values less than the curr node and vice - versa for the right side 
+    
+    //so now we have the values 
+    
+    //median = 3 
+    //smaller = [1 2]
+    //greater = [4]
+    
+    //we can just continually find the median of the left and right arrays and create nodes with that and then say that the currnode.left = function deriveMedianFromArr(left) and same thing for the right side 
+    
+    //lets create this function whose purpose is to derive the median from a set of numbesr that are sorted 
+    
+    var deriveMedianIdxFromArr = (arr) => {
+        //since the arr is sorted, we need to first find the length
+        let len = arr.length;
+        //given an odd arr length say 5 - 5 / 2 math.floor func = 2 which would be the right index 
+        
+        //given an even function say 4 4 / 2 = 2 which also is the right value say [1 2 3 4] in this case 3 
+        
+        //however were the length of the array to be 1 then 1 / 2 = 0 so that also works 
+        
+        //were the length 2 it would also be. okay 
+        
+        let medianIdx = Math.floor(len /  2);
+        return medianIdx;
+    }
+    
+    //we now have to do an in order traversal so 
+    var inOrderTreeValues = [];
+    var inOrder = (root) => {
+        if (!root) return;
+        
+        inOrder(root.left); //go all the way down to the bottom and traverse the entirety of the left side before moving on to the curr and right 
+        inOrderTreeValues.push(root.val);
+        inOrder(root.right)
+    };
+    
+    
+    inOrder(root);
+    // console.log(inOrderTreeValues)
+    
+    //inOrderTreeValues = [1 2 3 4];
+    
+    //make a function that given the in order traversal of a tree return a balanced binary search tree 
+    
+    var constructBST = (arr) => {
+        if (!arr.length) return null;
+        
+        let medianIdx = deriveMedianIdxFromArr(arr);
+        let median = arr[medianIdx];
+        let smaller = arr.slice(0, medianIdx);
+        let larger = arr.slice(medianIdx+1);
+        
+        // console.log(medianIdx, median, smaller, larger)
+        
+        let node = new TreeNode(median);
+        
+        //recursively find the left and right values of this new node 
+        node.left = constructBST(smaller);
+        node.right = constructBST(larger);
+        
+        return node;
+    };
+    
+    let head = constructBST(inOrderTreeValues)
+    
+    return head;
+    
+};
