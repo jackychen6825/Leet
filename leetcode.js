@@ -4051,3 +4051,67 @@ const checkPalindrom = (string, leftIdx, rightIdx) => {
 	}
 	return [leftIdx+1,rightIdx] //returning the largest possible substring thats palindrome idxs for left and right 
 }
+
+/**
+ * @param {string} boxes
+ * @return {number[]}
+ */
+var minOperations = function(boxes) {
+    
+    //given input boxes = "110"
+    
+    //output [1, 1, 3] 
+    
+    //in this case since box 3 is empty 
+    
+    //given 110 box 1 has 1 box 2 has 1 box 3 is empty 
+    
+    //10101010 either 1 or 0 
+    
+    //given an index 1 
+    
+    //nested for loop indexed at position 0 
+    
+    //for loop
+    
+    //if (value === 1) 
+    
+    //position = index = 0 
+    
+    //position - nestLoopIndex = someValue (negative value) 
+    
+    //someValue ^ 2 ^ 0.5 --> positive value 
+    
+    //counter variable increments based on the absolute value os someValue 
+    
+    //end answer[i] = someValue 
+    
+    const answer = [];
+    
+    //for loop 
+    for (let i = 0; i < boxes.length; i++) {
+        
+        let counter = 0;
+        
+        //make the nested for loop 
+        for (let j = 0; j < boxes.length; j++) {
+            let boxValue = boxes[j]
+            
+            //conditional 
+            if (boxValue === "1") {
+                let boxDistance = i - j 
+                let absolute = Math.pow(Math.pow(boxDistance, 2), 0.5)
+                counter += absolute;
+            }
+        }
+        
+        //here we have completed counter - num of operations it takes to move all balls from all boxes into the current box positioned at index i 
+        
+        answer[i] = counter;
+    }
+    
+    return answer;
+    
+};
+
+//time complexity - each item box within the boxes string, you must iterate through the box once so say n is the length of the string boxes, then this would be o(n^2)
