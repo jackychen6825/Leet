@@ -4212,3 +4212,25 @@ var dailyTemperatures = function(temperatures) {
     return answer;
     
 };
+
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var subsets = function(nums) {
+    
+    let result = [];
+    
+    const backTrack = (arr, index) => {
+        result.push(arr);
+        if(index >= nums.length) return;
+        for(let i = index; i < nums.length; i++) {
+            backTrack([...arr, nums[i]], i + 1);
+        }
+    }
+    
+    backTrack([], 0);
+    
+    return result;
+    
+};
