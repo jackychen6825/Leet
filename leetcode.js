@@ -4115,3 +4115,100 @@ var minOperations = function(boxes) {
 };
 
 //time complexity - each item box within the boxes string, you must iterate through the box once so say n is the length of the string boxes, then this would be o(n^2)
+
+
+function minOperations(boxes) {
+  const result = Array(boxes.length).fill(0);
+
+  //given 110 
+  //[0 0 0]
+  
+  // First we make one pass through the array (left to right).
+  // For each index, we calculate the moves needed to get every
+  // non-empty box on the left of the current index to the current index.
+  
+  // At each i in boxes:
+  //   - add the running sum to result[i]
+  //   - increment the notEmpty box count if the current box is '1'
+  //   - add the previously seen notEmpty boxes (including current index) to the runningSum
+  
+  let notEmpty = 0;
+  let runningSum = 0;
+  
+  for (let i = 0; i < boxes.length; ++i) { //iterating over the boxes string
+    result[i] += runningSum; 
+    if (boxes[i] === '1') ++notEmpty;
+    runningSum += notEmpty;
+  }
+  
+  // Make one more pass through the array (right to left).
+  // The operations are identical to the first loop, except that
+  // this pass calculates the moves needed to get every non-empty box
+  // on the right of each index to the current index.
+  
+  notEmpty = 0;
+  runningSum = 0;
+  
+  for (let i = boxes.length - 1; i >= 0; --i) {
+    result[i] += runningSum;
+    if (boxes[i] === '1') ++notEmpty;
+    runningSum += notEmpty;
+  }
+  
+  return result;
+}
+
+var subsets = function(nums) {
+    let tempDataStruct = []
+    let result = []
+    let index = 0
+    
+    function backtracking(stack, index) {
+        result.push([...stack]) //so i imagine that stack is an array and its just going to 
+        
+        for(let i = index; i < nums.length; i++) {
+            stack.push(nums[i])
+            backtracking(stack, i + 1)
+            stack.pop();
+        }
+    }
+    backtracking(tempDataStruct, index)
+    return result;
+};
+
+/**
+ * @param {number[]} temperatures
+ * @return {number[]}
+ */
+var dailyTemperatures = function(temperatures) {
+    
+    let stack = [],
+        len = temperatures.length,
+        answer = new Array(len).fill(0);
+    
+    for (let i = len-1; i >= 0; i--) {
+        const temp = temperatures[i]
+        let stackLen = stack.length
+        
+        for (j = stackLen-1; j >= 0; j--) {
+            const nearestHigh = stack[j]
+            if (nearestHigh.temp > temp) {
+                let difference = nearestHigh.idx - i;
+                answer[i] = difference
+                break;
+            } else {
+                stack.pop()
+            }
+        }
+        
+        stack.push({
+            idx: i,
+            temp 
+        })
+    }
+    
+    // console.log()
+    
+    return answer;
+    
+};
