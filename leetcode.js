@@ -4261,3 +4261,42 @@ var decode = function(shortUrl) {
     return hashMap.get(shortUrl);
 
 }
+
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {number}
+ */
+var minSteps = function(s, t) {
+    
+    //make a hash map of s { char: count }
+    
+    //iterate through t and for each char see if that char exists within the hash map if it does exists and the value is greater than 0, decrement value in the end, return the sum of the values of the hash map 
+    
+    const mapS = {};
+    
+    s.split("").forEach(character => {
+        if (!mapS[character]) mapS[character] = 0;
+        mapS[character]++;
+    })
+    
+    t.split("").forEach(character => {
+        if (mapS[character] && mapS[character] > 0) {
+            mapS[character]--;
+        }
+    })
+    
+    const counts = Object.keys(mapS)
+    
+    let steps = 0;
+    
+    counts.forEach(key => {
+        const value = mapS[key];
+        steps += value;
+    })
+    
+    // console.log(counts, mapS)
+    
+    return steps;
+    
+};
