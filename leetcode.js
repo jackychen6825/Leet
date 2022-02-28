@@ -4234,3 +4234,30 @@ var subsets = function(nums) {
     return result;
     
 };
+
+/**
+ * Encodes a URL to a shortened URL.
+ *
+ * @param {string} longUrl
+ * @return {string}
+ */
+
+var hashMap = new Map(),
+    counter = 0;
+
+//when encoding we are turning something long into something short
+var encode = function(longUrl) {
+    counter++; //increment the counter to make it unique for each url 
+    const encodedURL = `http://tinyurl.com/${counter}`//counter will be unique for each iteration so encoded as such. 
+
+    //enter this value into the hash map 
+    hashMap.set(encodedURL, longUrl) //the encoded url is going to point to the long url for decoding purposes 
+
+    return encodedURL;
+}
+
+var decode = function(shortUrl) {
+    //here we already have the hash map with keys - encoded and values decoded so 
+    return hashMap.get(shortUrl);
+
+}
