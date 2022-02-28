@@ -4300,3 +4300,58 @@ var minSteps = function(s, t) {
     return steps;
     
 };
+
+
+/**
+ * @param {string[]} cpdomains
+ * @return {string[]}
+ */
+var subdomainVisits = function(cpdomains) {
+  
+    //need to make a hash map where each key is a subdomain example { "com":  1 } this is the count of the amount of time this subdomain has been visited so we just do. this for each value within the cpdomains array 
+    
+    //we need to iterate through the cpdomains and get the string example "900 google.mail.com" we need to seperate the value 900 from google.mail.com which they're seperated by a space so splitting them on the space makes it [900, "google.mail.com"]
+    
+    //now we have the count and the cpdomain so if we split the second element on "." we  have ["google", "mail", "com"]
+    
+    
+    //then we check out map for  each of those subdomains and increment the count for each subdomain as well sooo
+    
+    const counts = {};
+    
+    cpdomains.forEach(item => {
+        //"900 google.mail.com"
+        
+        const itemArray = item.split(" ");
+        //itemArray = ["900", "google.mail.com"]
+        const visits = parseInt(itemArray[0]);
+        const domain = itemArray[1]; //google.mail.com
+        const subDomains = domain.split("."); //["google", "mail", "com"]
+        
+        let accumulatorString = "";
+        for (let i = subDomains.length-1; i >= 0; i--) {
+            //subDomains = ["google",  "mail", "com"]  com --> mail --> google
+            if (i === subDomains.length-1) {
+                accumulatorString = subDomains[i];
+            } else {
+                accumulatorString = subDomains[i] + "." + accumulatorString;
+            }
+            
+            if (!counts[accumulatorString]) {
+                counts[accumulatorString] = visits;
+            } else if (counts[accumulatorString]) {
+                counts[accumulatorString] += visits;
+            }
+            
+        }
+    })
+    
+    const response = [];
+    Object.keys(counts).forEach(key => {
+        const numVisits = counts[key]
+        const responseString = `${numVisits} ${key}`;
+        response.push(responseString)
+    })
+    
+    return response;
+};
