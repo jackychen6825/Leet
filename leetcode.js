@@ -4355,3 +4355,57 @@ var subdomainVisits = function(cpdomains) {
     
     return response;
 };
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var mergeNodes = function(head) {
+    
+    //we are given a linked list where the head and the tail are nodes of value 0
+    
+    //merge the nodes between zeros and return in between a node that has a value equal to the sum of all the merged nodes 
+    
+    //iterate through the entire linked list when we see a zero increment the count of zeros to 1 from 0
+    //when the value of the node isnt 0, add the values to an array 
+    
+    //when our zero count is 1 and we see another 0, find the sum of the arr and make a new node with the sum 
+    
+    //do the same until you reach the end and return the new linked list 
+    
+    //how do we iterate through a linked list?
+    let curr = head;
+
+    let nodeValues = [];
+    const reducer = (a, b) => a + b;
+    
+    let modifiedList = new ListNode();
+    let modifiedPointer = modifiedList;
+    
+    while (curr) {
+        if (curr.val === 0) {
+            if (nodeValues.length) {
+                const sum = nodeValues.reduce(reducer);
+                const newNode = new ListNode(sum)
+                modifiedList.next = newNode;
+                modifiedList = newNode;   
+                nodeValues = [];
+                
+            }
+        } else {
+            nodeValues.push(curr.val)
+        }
+        
+        curr = curr.next;
+    }
+    
+    return modifiedPointer.next;
+    
+};
