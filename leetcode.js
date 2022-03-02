@@ -4629,3 +4629,47 @@ var canVisitAllRooms = function(rooms) {
     return visited.length === rooms.length
     
 };
+
+/**
+ * @param {number[][]} isConnected
+ * @return {number}
+ */
+var findCircleNum = function(isConnected) {
+    
+    let matrix = {}; 
+    
+    for (let row = 0; row < isConnected.length; row++) {
+        for (let col = 0; col < isConnected.length; col++) {
+            let connection = isConnected[row][col];
+            
+            let city = row + 1
+            if (!matrix[city]) matrix[city] = [];
+            
+            if (connection) matrix[city].push(col+1)
+        }
+    }
+    
+    let provinces = 0; 
+    let visited = [];
+    
+    let dfs = city => {
+        visited.push(city);
+        
+        let neighbors = matrix[city]; 
+        
+        for (let neighbor of neighbors) {
+            if (!visited.includes(neighbor)) {
+                dfs(neighbor)
+            }
+        }
+    }
+    
+    Object.keys(matrix).forEach(city => {
+        if (!visited.includes(parseInt(city))) {
+            provinces++;
+            dfs(city)
+        } 
+    })
+    
+    return provinces;
+};
