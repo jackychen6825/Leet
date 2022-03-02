@@ -4409,3 +4409,46 @@ var mergeNodes = function(head) {
     return modifiedPointer.next;
     
 };
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} k
+ * @return {ListNode}
+ */
+var swapNodes = function(head, k) {
+    
+    let listArray = [],
+        curr = head;
+    
+    while (curr) {
+        listArray.push(curr.val);
+        curr = curr.next;
+    }
+    
+    //[1 2 3 4 5]
+    
+    let index1 = k-1,
+        index2 = listArray.length - k,
+        counter = 0;
+ 
+    [listArray[index1], listArray[index2]] = [listArray[index2], listArray[index1]]
+    
+    
+    let newHead = new ListNode();
+    let response = newHead;
+    
+    listArray.forEach(val => {
+        const next = new ListNode(val)
+        newHead.next = next;
+        newHead = newHead.next;
+    })
+    
+    return response.next;
+};
