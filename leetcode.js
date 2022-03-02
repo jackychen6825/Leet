@@ -4452,3 +4452,62 @@ var swapNodes = function(head, k) {
     
     return response.next;
 };
+
+/**
+ * // Definition for a Node.
+ * function Node(val, left, right) {
+ *      this.val = val;
+ *      this.left = left;
+ *      this.right = right;
+ *  };
+ */
+
+/**
+ * @param {Node} root
+ * @return {Node}
+ */
+var treeToDoublyList = function(root) {
+    
+    if (!root) return;
+    
+    //define a helper function that uses dfs to traverse the tree 
+    
+    //we need two variables head and tail at the end we connect the two variables nodes to make a circular linked list 
+    var head, 
+        tail;
+    
+    //define the helper function 
+    var dfs = node => {
+        //recurive base case is usually when theres no value for node 
+        if (!node) return;
+        
+        dfs(node.left)
+        
+        //some logic here on the self node 
+        //here we are sitting at the lower right most node 
+        if (tail) {
+            
+            //otherwise we have the tail reference basically the prev node 
+            tail.right = node;
+            node.left = tail;
+            
+        } else {
+            //here there is no value for tail and no values for head so set head
+            head = node;   
+        }
+        //in the first run both head and tails will be set to node 
+        //we must move tail to the current node 
+        tail = node;
+        
+        dfs(node.right)
+    }
+    
+    dfs(root)
+    
+    
+    //connect the head and tail to make a circular linked list
+    head.left = tail;
+    tail.right = head;
+    
+    return head;
+};
