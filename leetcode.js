@@ -4576,3 +4576,56 @@ var plusOne = function(head) {
     
     return response.next;
 };
+
+/**
+ * @param {number[][]} rooms
+ * @return {boolean}
+ */
+var canVisitAllRooms = function(rooms) {
+    
+//     given an array rooms [[1] [2] [3] []] - return true 
+    
+//     convert rooms array to a matrix 
+    
+//     {
+//         0: [1],
+//         1: [2],
+//         ...
+//     }
+        
+//     we have a visited array that visits each of the rooms using dfs and does not revisit the room if already included within our visited array 
+    
+//     each time we add something to visited, check the length of visited and if equal to rooms.length return true and end 
+    
+    const adjacencyMatrix = {};
+    
+    rooms.forEach((room, idx) => {
+        adjacencyMatrix[idx] = room;
+    })
+    
+    const visited = [];
+    
+    //traverse the adjacency matrix 
+    
+    const traversal = node => {
+        visited.push(node)
+
+        
+        const keys = adjacencyMatrix[node]; 
+        
+        for (let key of keys) {
+            if (!visited.includes(key)) {
+                traversal(key)
+            }
+        }
+        
+    }
+    
+    traversal(0)
+    
+    // console.log(visited)
+    
+    
+    return visited.length === rooms.length
+    
+};
