@@ -4511,3 +4511,68 @@ var treeToDoublyList = function(root) {
     
     return head;
 };
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var plusOne = function(head) {
+    
+    let placeholders = [];
+    
+    while (head) {
+        const value = head.val;
+        placeholders.push(value)
+        head = head.next;
+    }
+    
+    let length = placeholders.length-1,
+        carry = 0;
+    
+    for (let i = length; i >= 0; i--) {
+        const num = placeholders[i]; 
+        
+        if (i === length && num < 9) {
+            placeholders[i] = num + 1;
+            break;
+        } 
+        
+        if (num === 9 && i === length) {
+            placeholders[i] = 0;
+            carry = 1;
+        }
+        
+        if (num === 9 && carry === 1) {
+            placeholders[i] = 0;
+            carry = 1;
+        } else if (num !== 9 && carry === 1) {
+            placeholders[i]  = num + 1
+            carry = 0;
+        }
+        
+        if (i === 0 && carry === 1) {
+            placeholders[i] = 0;
+            placeholders.unshift(1)
+        } 
+    }
+    
+    
+    let initialNode = new ListNode(),
+        response = initialNode;
+    
+    placeholders.forEach(digit => {
+        const curr = new ListNode(digit);
+        initialNode.next = curr;
+        initialNode = initialNode.next;
+    })
+    
+    
+    return response.next;
+};
