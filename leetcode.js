@@ -4673,3 +4673,48 @@ var findCircleNum = function(isConnected) {
     
     return provinces;
 };
+
+/**
+ * @param {number[]} deck
+ * @return {number[]}
+ */
+var deckRevealedIncreasing = function(deck) {
+    
+    let length = deck.length;
+    
+    let array = new Array(length)
+    
+    array.fill(null)
+    
+    deck.sort((a, b) => a - b); //sorts in ascending order 
+    
+    var idx = 0;
+    
+    var findNextEmpty = (array, index) => {
+        while (index < array.length) {
+            if (!array[index]) return index;
+            index++
+        }
+        
+        index = 0;
+        while (index < array.length) {
+            if (!array[index]) return index;
+            index++
+        }
+    }
+    
+    
+    while (deck.length) {
+        let card = deck.shift()
+        
+        array[idx] = card;
+        
+        let emptyOne = findNextEmpty(array, idx + 1)
+        let emptyTwo = findNextEmpty(array, emptyOne + 1)
+        idx = emptyTwo
+    }
+    
+    
+    return array;
+    
+};
