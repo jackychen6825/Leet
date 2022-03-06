@@ -4718,3 +4718,44 @@ var deckRevealedIncreasing = function(deck) {
     return array;
     
 };
+
+/**
+ * Definition for isBadVersion()
+ * 
+ * @param {integer} version number
+ * @return {boolean} whether the version is bad
+ * isBadVersion = function(version) {
+ *     ...
+ * };
+ */
+
+/**
+ * @param {function} isBadVersion()
+ * @return {function}
+ */
+var solution = function(isBadVersion) {
+    /**
+     * @param {integer} n Total versions
+     * @return {integer} The first bad version
+     */
+    return function(n) {
+        
+        let [left, right] = [1, n];
+        
+        while (left < right) {
+            let mid = left + Math.floor((right - left) / 2);
+            
+            let isBad = isBadVersion(mid);
+            if (isBad) {
+                //if the middle element is bad, all subsequent version are also bad 
+                //to find the first bad version, move the right pointer to the mid position because this may be the first bad version 
+                right = mid;
+            } else {
+                //otherwise, this version is good, so we move the left pointer one space right of the mid element as we know the middle element is a good version hence it and all before it are good version 
+                left = mid + 1;
+            }
+        }
+        
+        return left; //this will be the first bad version and the response ultimately 
+    };
+};
