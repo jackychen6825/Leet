@@ -4841,3 +4841,32 @@ var singleNumber = function(nums) {
 
 //time complexity - sorting the array is logn and iterating. through it. once is o n so o n 
 //we. are doing this in place. so constant space complexity 
+
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var majorityElement = function(nums) {
+    let majority = Math.floor(nums.length / 2);
+    let map = {};
+    
+    for (const num of nums) {
+        if (!map[num]) map[num] = 0;
+        map[num]++
+    }
+    
+    let answer;
+    
+    Object.keys(map).forEach(key => {
+        const count = map[key];
+        // console.log(count, key)
+        if (count > majority) {
+            // console.log('yes')
+            answer = key 
+        }
+    })
+    
+    return answer;
+    
+};
