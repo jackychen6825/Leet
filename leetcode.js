@@ -4733,18 +4733,18 @@ var deckRevealedIncreasing = function(deck) {
  * @param {function} isBadVersion()
  * @return {function}
  */
-var solution = function(isBadVersion) {
+var solution = function (isBadVersion) {
     /**
      * @param {integer} n Total versions
      * @return {integer} The first bad version
      */
-    return function(n) {
-        
+    return function (n) {
+
         let [left, right] = [1, n];
-        
+
         while (left < right) {
             let mid = left + Math.floor((right - left) / 2);
-            
+
             let isBad = isBadVersion(mid);
             if (isBad) {
                 //if the middle element is bad, all subsequent version are also bad 
@@ -4755,7 +4755,38 @@ var solution = function(isBadVersion) {
                 left = mid + 1;
             }
         }
-        
+
         return left; //this will be the first bad version and the response ultimately 
     };
 };
+
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var sortedSquares = function(nums) {
+    
+    let left = 0, 
+        right = nums.length-1,
+        output = [];
+    
+    while (left <= right) {
+        let leftVal = nums[left],
+            rightVal = nums[right],
+            leftSquared = Math.pow(leftVal, 2),
+            rightSquared = Math.pow(rightVal, 2);
+        
+        if (leftSquared > rightSquared) {
+            output.unshift(leftSquared)
+            left++
+        } else {
+            output.unshift(rightSquared)
+            right--
+        }
+    }
+        
+    return output;
+    
+};
+
+//since we traverse the nums array only once, this would be o(n)
