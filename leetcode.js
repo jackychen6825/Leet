@@ -4818,3 +4818,26 @@ var rotate = function(nums, k) {
     reverse(nums, k, nums.length-1)
     
 };
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var singleNumber = function(nums) {
+    if (nums.length === 1) return nums[0];
+    
+    nums.sort((a, b) => a - b);
+    
+    for (let i = 0; i < nums.length; i += 2) {
+        let curr = nums[i];
+        let next = nums[i+1];
+        
+        if (curr !== next) {
+            return curr
+        }
+    }
+    
+};
+
+//time complexity - sorting the array is logn and iterating. through it. once is o n so o n 
+//we. are doing this in place. so constant space complexity 
