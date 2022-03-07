@@ -4870,3 +4870,29 @@ var majorityElement = function(nums) {
     return answer;
     
 };
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var majorityElement = function(nums) {
+    
+    let count = 0, 
+        res = undefined;
+    
+    for (const num of nums) {
+        if (num !== res) {
+            if (count === 0) {
+                res = num
+            } else {
+                count--
+            }
+        } else {
+            count++
+        }
+    }
+    
+    return res;
+    
+    
+};
