@@ -4790,3 +4790,31 @@ var sortedSquares = function(nums) {
 };
 
 //since we traverse the nums array only once, this would be o(n)
+
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+var rotate = function(nums, k) {
+    
+    k = k % nums.length //why do we need to modulo here? 
+    
+    //imagine the array [1 2 3 4] when we have 10 rotation, the reverse function cannot find the tenth. index within the array so instead, we just do it 10 % 4 or 2 times 
+    
+    var reverse = (array, start, end) => {
+        let left = start, 
+            right = end;
+        
+        while (left < right) {
+            [array[left], array[right]] = [array[right], array[left]]
+            left++;
+            right--;
+        }
+    }
+    
+    reverse(nums, 0, nums.length-1)
+    reverse(nums, 0, k-1)
+    reverse(nums, k, nums.length-1)
+    
+};
