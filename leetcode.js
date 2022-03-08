@@ -5033,3 +5033,27 @@ var twoSum = function(numbers, target) {
     }
     
 };
+
+/**
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+var sortColors = function(nums) {
+    
+    let sorted = false;
+    
+    while (!sorted) {
+        sorted = true 
+        
+        for (let i = 0; i < nums.length-1; i++) {
+            let curr = nums[i],
+                next = nums[i+1]
+            
+            if (curr > next) {
+                [nums[i], nums[i+1]] = [nums[i+1], nums[i]]
+                sorted = false;
+            }
+        }
+    }
+    
+};
