@@ -4944,3 +4944,42 @@ var twoSum = function(numbers, target) {
     }
     
 };
+
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var threeSum = function(nums) {
+    let res = []
+    
+    nums.sort((a, b) => a - b)
+    
+    for (let i = 0; i < nums.length; i++) {
+        let curr = nums[i], 
+            prev = nums[i-1]
+        
+        if (i > 0 && curr === prev) continue;
+        
+        let l = i+1,
+            r = nums.length-1;
+        while (l < r) {
+            let threeSum = curr + nums[l] + nums[r];
+            
+            if (threeSum > 0) {
+                r--;
+            } else if (threeSum < 0) {
+                l++;
+            } else {
+                res.push([curr, nums[l], nums[r]])
+                
+                l++;
+                while (nums[l] === nums[l-1] && l < r) {
+                    l++
+                }
+            }
+        }
+    }
+    
+    return res
+    
+};
