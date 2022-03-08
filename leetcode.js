@@ -5085,3 +5085,42 @@ var sortColors = function(nums) {
     
     
 };
+
+/**
+ * @param {number[][]} intervals
+ * @return {number[][]}
+ */
+var merge = function(intervals) {
+    
+    intervals.sort((a, b) => a[0] - b[0]); //o n logn 
+
+    let answer = [],
+        current = [];
+    
+    for (let i = 0; i < intervals.length; i++) { 
+        let matrix = intervals[i];
+
+        
+        if (current.length === 0) {
+            current = matrix
+            continue
+        } else {
+            let [begin, end] = current,
+                [begin2, end2] = matrix;
+            
+            if (end >= begin2) {
+                if (end < end2) {
+                    current[1] = end2;
+                }
+            } else {
+                answer.push(current)
+                current = matrix;
+            }
+            
+        }
+    }
+    
+    if (current.length) answer.push(current);
+    
+    return answer;
+};
