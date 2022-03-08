@@ -4983,3 +4983,29 @@ var threeSum = function(nums) {
     return res
     
 };
+
+/**
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+var moveZeroes = function(nums) {
+
+    let i = 0;
+    let counter = 0;
+    
+    while (counter <= nums.length) {
+        const curr = nums[i];
+        
+        if (curr === 0) {
+            nums.splice(i, 1)
+            nums.push(curr)
+        } else {
+            i++
+        }
+        
+        counter++;
+    }
+    
+    //iterate. through the array n times so linear time complexity 
+    //we dont use any extra space so constant space complexity
+};
