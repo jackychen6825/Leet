@@ -5174,3 +5174,31 @@ var reverseWords = function(s) {
     return stringArr.join(" ")
     
 };
+
+/**
+ * @param {number} rowIndex
+ * @return {number[]}
+ */
+var getRow = function(rowIndex) {
+    
+    if (!rowIndex) return [1];
+    
+    let prevRow = getRow(rowIndex - 1),
+        currRow = [],
+        length = prevRow.length + 1;
+
+    
+    for (let i = 0; i < length; i++) {
+        let l = prevRow[i-1],
+            r = prevRow[i]
+        
+        if (!l) l = 0 
+        if (!r) r = 0
+        
+        let sum = l + r
+        currRow[i] = sum;
+    }
+    
+    return currRow;
+
+};
