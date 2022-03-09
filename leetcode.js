@@ -5202,3 +5202,26 @@ var getRow = function(rowIndex) {
     return currRow;
 
 };
+
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function(prices) {
+    
+    let s = 1,
+        b = 0,
+        max = 0; 
+        
+    while (s < prices.length) {
+        if (prices[s] < prices[b]) {
+            b = s
+            s++
+        } else {
+            max = Math.max(max, prices[s] - prices[b])
+            s++;
+        }
+    }
+    
+    return max;
+};
