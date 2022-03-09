@@ -5225,3 +5225,23 @@ var maxProfit = function(prices) {
     
     return max;
 };
+
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var containsDuplicate = function(nums) {
+    
+    let passed = new Set()
+    
+    for (let i = 0; i < nums.length; i++) {
+        if (passed.has(nums[i])) {
+            return true;
+        } else {
+            passed.add(nums[i])
+        }
+    }
+    
+    return false;
+    
+};
