@@ -5292,7 +5292,63 @@ var productExceptSelf = function(nums) {
         output[i] = pre[i] * post[i]
     }
     
-    return output;
+    return output;  
+};
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxSubArray = function(nums) {
+    
+//     find the continuous subarray with the largest sum and return the sum 
+    
+//     we probably only need to make one pass 
+    
+//     of course we need a pointer call it c for current
+//     ofc we need the curr max call it max 
+//     the running sum of the curr subarr 
+    
+//     max = 6 
+//     running = 5
+    
+    
+    
+    let max = nums[0], 
+        running = 0;
+
+    for (let i = 0; i < nums.length; i++) {
+        running = running + nums[i];
+        
+        max = Math.max(running, max) 
+         
+        if (running < 0) {
+            running = 0;
+        }   
+    }
+    
+    return max;
+    
+    
+    
+//     if the running sum does not go below zero, we keep going otherwise we change the pointers 
+    
+//     since -2 makes the running sum less than zero, we move to the next one 
+    
+//     we move on to 1 and take it 
+    
+//     we move one to -3, skip it and reset running sum 
+    
+//     4: we take 
+//     -1: we take still even though negative 
+//     2: take 
+//     1: take 
+//     -5: take 
+//     4: take 
+    
+//          v                   v
+//     i: [-2,1,-3,4,-1,2,1,-5,4] -> [4 -1 2 1]
+//     o: 6
     
     
 };
