@@ -5124,3 +5124,27 @@ var merge = function(intervals) {
     
     return answer;
 };
+
+/**
+ * @param {character[]} s
+ * @return {void} Do not return anything, modify s in-place instead.
+ */
+var reverseString = function(s) {
+    
+//     write a functin that reverses a string with the array in place so o(1) space complexity. should also just take o(n) time 
+//          r
+//          l
+//     [o l l e h] swap
+    
+//     [o l l e h]
+    
+    let l = 0,
+        r = s.length-1;
+    
+    while (l < r) {
+        [s[l], s[r]] = [s[r], s[l]]
+        l++;
+        r--;
+    }
+    
+};
