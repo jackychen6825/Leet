@@ -5245,3 +5245,54 @@ var containsDuplicate = function(nums) {
     return false;
     
 };
+
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var productExceptSelf = function(nums) {
+    
+//     prefix * postfix 
+    
+//     curr = 24
+//      v 
+//     [1 2 3 4]
+    
+//     [24 12 8 6]
+    
+//     the prefix of a number within an array is the product of all the numbers before that number 
+    
+//     the postfix of a number within an array is the product of all the numbers after that number 
+    
+//     prefix: [1 1 2 6]
+//     postfix: [24 12 4 1]
+    
+    let pre = [],
+        post = [];
+        
+    //linear 
+        
+    let curr = 1;
+    
+    for (let i = 0; i < nums.length; i++) {
+        pre[i] = curr;
+        curr *= nums[i];
+    }
+    
+    //linear 
+    curr = 1;
+    for (let i = nums.length-1; i >= 0; i--) {
+        post[i] = curr;
+        curr *= nums[i];
+    }
+    
+    let output = [];
+    
+    for (let i = 0; i < nums.length; i++) {
+        output[i] = pre[i] * post[i]
+    }
+    
+    return output;
+    
+    
+};
