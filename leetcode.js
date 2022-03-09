@@ -5148,3 +5148,29 @@ var reverseString = function(s) {
     }
     
 };
+
+var reverseWords = function(s) {
+    
+    var reverse = s => {
+        let l = 0,
+            r = s.length-1,
+            sArr = s.split('');
+        
+        while (l < r) {
+            [sArr[l], sArr[r]] = [sArr[r], sArr[l]]
+            l++
+            r--
+        }
+        
+        return sArr.join("")
+    }
+    
+    const stringArr = s.split(" ")
+    
+    for (let i = 0; i < stringArr.length; i++) {
+        stringArr[i] = reverse(stringArr[i])
+    }
+    
+    return stringArr.join(" ")
+    
+};
