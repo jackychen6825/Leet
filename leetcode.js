@@ -5352,3 +5352,34 @@ var maxSubArray = function(nums) {
     
     
 };
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxProduct = function(nums) {
+    
+    let res = Math.max(...nums),
+        min = 1,
+        max = 1,
+        temp;
+    
+    for (const n of nums) { //iterate through the array once so o(n)
+        
+        if (n === 0) {
+            min = 1
+            max = 1
+            continue
+        }
+        
+        temp = max;
+        max = Math.max(n, n * max, n * min)
+        min = Math.min(n, temp * n, min * n)
+        res = Math.max(max, res)
+        
+    }
+    
+    return res;
+    
+};
+
