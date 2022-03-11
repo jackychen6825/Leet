@@ -5413,3 +5413,30 @@ var findMin = function(nums) {
     return res;
     
 };
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function(s) {
+    
+    let container = new Set(),
+        l = 0,
+        output = 0;
+    
+    for (let r = 0; r < s.length; r++) {
+        
+        while (container.has(s.charAt(r))) {
+            container.delete(s.charAt(l))
+            l++;
+        }
+        
+        container.add(s.charAt(r))
+        
+        // console.log(output, container.size)
+        output = Math.max(output, container.size)
+    }
+    
+    return output
+    
+};
