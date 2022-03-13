@@ -5513,3 +5513,38 @@ var isAnagram = function(s, t) {
     //time complexity o(s + t)
     //space complexity - o(s + t)
 }
+
+/**
+ * @param {string[]} strs
+ * @return {string[][]}
+ */
+var groupAnagrams = function(strs) {
+    
+    const map = {}
+    
+    for (const s of strs) {
+        
+        const counts = new Array(26)
+        counts.fill(0)
+                
+        s.split('').forEach((c, i) => {
+            const idx = s.charCodeAt(i) - 97
+            counts[idx]++
+        })
+        
+        //counts is completed its going to map idx to alphabet count 
+        
+        if (map[counts]) {
+            map[counts].push(s)
+        } else {
+            map[counts] = [s]
+        }
+    }
+    
+    const output = []
+    
+    Object.values(map).forEach(group => output.push(group))
+    
+    return output;
+    
+};
