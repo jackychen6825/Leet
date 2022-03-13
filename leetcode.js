@@ -5474,3 +5474,42 @@ var characterReplacement = function(s, k) {
     //space complexity o(n)
     
 };
+
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+var isAnagram = function(s, t) {
+    
+    const countsOne = {};
+         
+    for (let i = 0; i < s.length; i++) {
+        const char = s.charAt(i)
+        if (!countsOne[char]) countsOne[char] = 0
+        countsOne[char]++
+    }
+    
+    for (let i = 0; i < t.length; i++) {
+        const char = t.charAt(i)
+        
+        if (countsOne[char]) {
+            countsOne[char]--
+        } else {
+            countsOne[char] = 1
+        }
+    }
+    
+    
+    const counts = Object.values(countsOne)
+    for (let i = 0; i < counts.length; i++) {
+        const count = counts[i]
+        if (count > 0) return false
+    }
+    
+    return true;
+    
+    
+    //time complexity o(s + t)
+    //space complexity - o(s + t)
+}
