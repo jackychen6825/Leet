@@ -5440,3 +5440,37 @@ var lengthOfLongestSubstring = function(s) {
     return output
     
 };
+
+/**
+ * @param {string} s
+ * @param {number} k
+ * @return {number}
+ */
+var characterReplacement = function(s, k) {
+    
+    const counts = {} //this is to keep track of the counts of each char 
+    
+    let l = 0, //left pointer 
+        res = 0; //right pointer 
+    
+    for (let r = 0; r < s.length; r++) {
+        if (counts[s.charAt(r)]) {
+            counts[s.charAt(r)]++
+        } else {
+            counts[s.charAt(r)] = 1
+        }
+        
+        while ((r - l + 1) - Math.max(...Object.values(counts)) > k ) {
+            counts[s.charAt(l)]--
+            l++
+        }
+        
+        res = Math.max(res, r - l + 1)
+    }
+   
+    return res
+    
+    //time complexity o(n) we iterate through the string s once 
+    //space complexity o(n)
+    
+};
