@@ -5656,3 +5656,53 @@ var mergeTwoLists = function(list1, list2) {
     return dummy.next;
     
 };
+
+/**
+ * @param {string} s
+ * @param {number} numRows
+ * @return {string}
+ */
+var convert = function(s, numRows) {
+    //if the number of rows is 1 just return 
+    if (numRows === 1) return s;
+    
+    //create an array of arrays 
+    let matrix = [];
+    
+    for (let i = 0; i < numRows; i++) {
+        matrix[i] = [];
+    };  
+    
+    const chars = s.split('');
+    
+    //manually insert the first value 
+    if (s.length === 1) return chars[0];
+    
+    matrix[0].push(chars[0]);
+    
+    let row = 1,
+        direction = true;
+    
+    for (const c of chars.slice(1)) {
+        if (row === 0 || row === numRows-1) {
+            direction = !direction;
+        };
+        
+        matrix[row].push(c);
+        
+        if (direction) {
+            row++;
+        } else {
+            row--;
+        }
+    }
+    
+    let output = '';
+    
+    for (const row of matrix) {
+        output += row.join('');
+    };
+    
+    return output;
+    
+};
