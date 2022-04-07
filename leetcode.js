@@ -5743,9 +5743,50 @@ var longestConsecutive = function(nums) {
         }
     }
     
-    return longest;
-    
+    return longest;  
 };
 
-//time O(n)
-//space O(n)
+/**
+ * @param {number} n
+ * @param {number[][]} edges
+ * @return {boolean}
+ */
+var validTree = function(n, edges) {
+    
+    const adj = {};
+    
+    for (let i = 0; i < n; i++) {
+        adj[i] = [];
+    };
+    
+    for (const [a, b] of edges) {
+        adj[a].push(b);
+        adj[b].push(a);
+    };
+    
+    const visited = new Set();
+    
+    const dfs = (curr, prev) => {
+        if (visited.has(curr)) return false;
+        
+        visited.add(curr);
+        
+        for (const nei of adj[curr]) {
+            if (prev === nei) continue;
+            
+            if (!dfs(nei, curr)) return false;
+        };
+        
+        return true;
+    }
+    
+    const isConnected = dfs(0, -1); 
+    
+    console.log(isConnected)
+    
+    let counter = 0;
+    visited.forEach(ele => counter++)
+    
+    return isConnected && n === counter;
+    
+};
