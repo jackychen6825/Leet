@@ -5706,3 +5706,46 @@ var convert = function(s, numRows) {
     return output;
     
 };
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var longestConsecutive = function(nums) {
+    
+    const store = new Set();
+    
+    for (const n of nums) store.add(n);
+    
+    let longest = 0, currentSequence = 1;
+    
+    for (const n of nums) {
+        //if this is the start of a sequence 
+        if (!store.has(n-1)) {
+            currentSequence = 1;
+            //initialize a variable check to represent "keep checking",  and the current value 
+            let check = true;
+            let curr = n 
+            //while check is true keep checking 
+            while (check) {
+                //we assume that there are no more things to check ie end of sequence 
+                check = false;
+                //if however, the set has the next value in the sequence, keep checking, increment current and currentSequence       
+                if (store.has(curr + 1)) {
+                    check = true;
+                    curr++;
+                    currentSequence++;
+                }
+            }
+            
+            //now we have the length of this current seqeunce 
+            longest = Math.max(longest, currentSequence);
+        }
+    }
+    
+    return longest;
+    
+};
+
+//time O(n)
+//space O(n)
