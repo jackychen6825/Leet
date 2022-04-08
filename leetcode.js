@@ -5848,3 +5848,46 @@ var mergeKLists = function(lists) {
     return pointer.next;
     
 };
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+var zigzagLevelOrder = function(root) {
+    
+    if (!root) return [];
+    
+    let queue = [root];
+    
+    let output = [];
+    
+    let direction = false;
+    
+    while (queue.length) {
+        direction = !direction;
+        
+        const temp = [];
+        let level = [];
+        
+        for (const node of queue) {
+            level.push(node.val);
+            
+            if (node.left) temp.push(node.left);
+            if (node.right) temp.push(node.right);
+        };
+        
+        queue = temp;
+        if (!direction) level = level.reverse();
+        output.push(level);
+    };
+    
+    return output;
+};
