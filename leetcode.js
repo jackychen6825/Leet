@@ -5790,3 +5790,22 @@ var validTree = function(n, edges) {
     return isConnected && n === counter;
     
 };
+
+/* check and see if a binary search tree is a valid binary search tree*/
+
+function checkBST(root) {
+
+    const dfs = (root, lower, upper) => {
+        if (!root) return true;
+
+        if (root.val > upper || root.val < lower) return false;
+
+        if (!dfs(root.left, lower, root.val)) return false;
+        if (!dfs(root.right, root.val, upper)) return false;
+
+        //we return true because we have check the left and right subtrees and this node is within bounds
+        return true;
+    };
+
+    return dfs(root, -Infinity, Infinity);
+};
