@@ -5809,3 +5809,42 @@ function checkBST(root) {
 
     return dfs(root, -Infinity, Infinity);
 };
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode[]} lists
+ * @return {ListNode}
+ */
+var mergeKLists = function(lists) {
+    
+    const values = [];
+    
+    for (const head of lists) {
+        
+        let curr = head;
+        while (curr) {
+            values.push(curr.val);
+            curr = curr.next;
+        };
+    };
+    
+    let merged = new ListNode();
+    let pointer = merged;
+    
+    values.sort((a,b) => a-b);
+    
+    for (const v of values) {
+        const node = new ListNode(v);
+        merged.next = node;
+        merged = merged.next;
+    };
+    
+    return pointer.next;
+    
+};
