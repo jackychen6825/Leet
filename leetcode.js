@@ -5978,3 +5978,40 @@ var countComponents = function(n, edges) {
     return connectedComponents;
     
 };
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {TreeNode} p
+ * @return {TreeNode}
+ */
+var inorderSuccessor = function(root, p) {
+    
+    //we can just store the nodes within an array using inorder traversal and then. iterate through the array. and once we find the p node we return the next node within that. same array 
+    
+    const nodes = [];
+    
+    const inorder = (root) => {
+        if (!root) return;
+        
+        inorder(root.left);
+        nodes.push(root);
+        inorder(root.right);
+        
+    };
+    
+    inorder(root);
+    
+    for (let i = 0; i < nodes.length; i++) {
+        if (nodes[i] === p) return nodes[i+1];
+    };
+    
+    return null;
+    
+};
