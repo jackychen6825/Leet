@@ -5891,3 +5891,90 @@ var zigzagLevelOrder = function(root) {
     
     return output;
 };
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {TreeNode} p
+ * @return {TreeNode}
+ */
+var inorderSuccessor = function(root, p) {
+    
+    //we can just store the nodes within an array using inorder traversal and then. iterate through the array. and once we find the p node we return the next node within that. same array 
+    
+    const nodes = [];
+    
+    const inorder = (root) => {
+        if (!root) return;
+        
+        inorder(root.left);
+        nodes.push(root);
+        inorder(root.right);
+        
+    };
+    
+    inorder(root);
+    
+    for (let i = 0; i < nodes.length; i++) {
+        if (nodes[i] === p) return nodes[i+1];
+    };
+    
+    return null;
+    
+};
+
+/**
+ * @param {number} n
+ * @param {number[][]} edges
+ * @return {number}
+ */
+var countComponents = function(n, edges) {
+    
+    const adj = {};
+    
+    for (let i = 0; i < n; i++) {
+        adj[i] = [];
+    };
+    
+    for (const [a, b] of edges) {
+        adj[a].push(b);
+        adj[b].push(a);
+    };
+    
+    let visited = new Set();
+    let connectedComponents = 0;
+    
+    const keys = Object.keys(adj);
+    
+    const dfs = node => {
+        
+        visited.add(parseInt(node));
+        const neighbors = adj[node];
+        
+        //iterate through all the neighboring nodes 
+        for (const nei of neighbors) {
+            //if we havent visited the node yet check the node with the dfs function 
+            if (!visited.has(nei)) {
+                dfs(nei);
+            };
+        };
+        
+    };
+    
+    for (const k of keys) {
+        
+        if (!visited.has(parseInt(k))) {
+            dfs(k);
+            connectedComponents++;
+        };
+    };
+    
+    return connectedComponents;
+    
+};
