@@ -6063,3 +6063,34 @@ var climbStairs = function(n) {
     
     
 };
+
+const shortestPath = matrix => {
+    const n = matrix.length - 1;
+    
+    const queue = [{ row: 0, col: 0, distance: 0 }];
+    
+    while (queue.length) {
+        //get the row col and dis
+        const { row, col, distance } = queue.shift();
+        
+        //if this row, col pos is out of bounds continue to the next iteration
+        if (row < 0 || row > n || col < 0 || col > n) continue;
+        
+        //get the num of moves
+        const k = matrix[row][col];
+        
+        //if this is the end dest return distance
+        if (row === n && col === n) return distance;
+        
+        const offsets = [-k, k, -k, k];
+        
+        for (let i = 0; i < offsets.length; i++) {
+            const delta = offsets[i];
+            if (i === 0) queue.push({ row: row, col: col + delta, distance: distance + 1 })
+            if (i === 1) queue.push({ row: row, col: col + delta, distance: distance + 1 })
+            if (i === 2) queue.push({ row: row + delta, col: col, distance: distance + 1 })
+            if (i === 3) queue.push({ row: row + delta, col: col, distance: distance + 1 })
+        };
+    }
+    
+}
