@@ -6015,3 +6015,32 @@ var inorderSuccessor = function(root, p) {
     return null;
     
 };
+
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var canJump = function(nums) {
+    
+    const visited = new Set();
+    
+    const helper = idx => {
+        if (idx === nums.length-1) return true;
+        
+        visited.add(idx);
+        const jumps = nums[idx];
+        
+        for (let i = 1; i <= jumps; i++) {
+            if (!visited.has(idx + i)) {
+                if (helper(idx+i)) return true;
+            }
+        }
+        
+        return false;
+    };
+    
+    return helper(0);
+    
+    
+    
+};
