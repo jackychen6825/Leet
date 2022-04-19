@@ -6126,3 +6126,47 @@ var uniquePaths = function(m, n) {
     
     return rows[0];  
 };
+
+/**
+ * @param {number[][]} intervals
+ * @return {boolean}
+ */
+var canAttendMeetings = function(intervals) {
+    
+//     given an array of meeting time intervals where intervals[i] = [start, end] determine if a person can attend all meetings 
+    
+    
+    
+//             |-------------|     |---------------|
+//     |----------------------------------------------------|
+//     |----------------------------------------------------|
+        
+//     do we want to sort the meetings first? 
+        
+//     see if we sort then the complexity is gonna be O(n log n) 
+    
+//     as a result, we can iterate through and grab the end and start and then keep track of the latest end value and then check if the current start time is greater than the most recent end time
+    
+    
+    intervals.sort((a, b) => a[0] - b[0]);
+    
+    let endTime; 
+    
+    for (const [start, end] of intervals) {
+        if (!endTime) {
+            endTime = end;
+            continue;
+        };
+        
+        if (start >= endTime) {
+            endTime = end;
+        } else {
+            return false;
+        };
+    };
+    
+    return true;
+    
+    //time O(n log n)
+    //space O(1)
+};
