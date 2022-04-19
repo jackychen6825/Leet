@@ -6094,3 +6094,35 @@ const shortestPath = matrix => {
     }
     
 }
+
+/**
+ * @param {number} m
+ * @param {number} n
+ * @return {number}
+ */
+var uniquePaths = function(m, n) {
+    
+    //we are going to compose the lower most row first which is comprised of values of 1's
+    let rows = new Array(n);
+    rows.fill(1);
+    
+    //we will need to create m - 1 rows because we already have the lower most row ready to go 
+    
+    for (let i = 0; i < m - 1; i++) {
+        //so for each row we need to create a brand new row 
+        let newRow = new Array(n);
+        newRow.fill(1);
+        //iterate through the newRow item from the second to last item to the first item
+        for (let j = n-2; j >= 0; j--) {
+            //now we are going to iterate from the back to the front 
+            
+            //we are going to the the values to the right and from the bottom
+            newRow[j] = newRow[j+1] + rows[j];
+        };
+        
+        //replace the current row 
+        rows = newRow;
+    };
+    
+    return rows[0];  
+};
