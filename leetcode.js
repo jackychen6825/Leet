@@ -6170,3 +6170,32 @@ var canAttendMeetings = function(intervals) {
     //time O(n log n)
     //space O(1)
 };
+
+/**
+ * @param {number[]} coins
+ * @param {number} amount
+ * @return {number}
+ */
+var coinChange = function(coins, amount) {
+    
+    //create an array where each idx points to the number of coins need to construct that amount 
+    
+    const dp = new Array(amount + 1);
+    dp.fill(Infinity);
+    dp[0] = 0 //it takes zero  coins to get to the amount of zero 
+    
+    for (let i = 1; i < dp.length; i++) {
+        //iterate through each coin 
+        for (const c of coins) {
+            if (i - c >= 0) dp[i] = Math.min(dp[i], 1 + dp[i-c])
+        }
+    }
+    
+    if (dp[amount] !== Infinity) {
+        return dp[amount]
+    } else {
+        return -1;
+    }
+    
+    
+};
