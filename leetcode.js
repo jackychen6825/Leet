@@ -6223,3 +6223,63 @@ var lengthOfLIS = function(nums) {
     
     //O(n^2)
 };
+
+/**
+ * @param {number[][]} board
+ * @return {void} Do not return anything, modify board in-place instead.
+ */
+var gameOfLife = function(board) {
+    
+    let rows = board.length,
+        cols = board[0].length;
+    
+    //create the copy of the original 
+    const copy = new Array(board.length);
+    
+    for (let i = 0; i < board.length; i++) {
+		const row = board[i];
+		copy[i] = [...row];
+    };
+
+   const offset = [
+        [1, 0],
+        [-1, 0],
+        [0, 1],
+        [0, -1],
+        [-1, -1],
+        [-1, 1],
+        [1, -1],
+        [1, 1]
+    ];
+
+        //iterate through every item of every row and check its neighbors 
+    for (let i = 0; i < board.length; i++) { //row iterator 
+        
+        for (let j = 0; j < board[0].length; j++) { //col iterator
+            //keep track of this cells neighbors 
+            let livingNeighbors = 0; //2
+
+            for (const [dr, dc] of offset) {
+                if (i + dr >= rows || i + dr < 0 || j + dc >= cols || j + dc < 0) {
+                    
+                } else {
+                    if (copy[i+dr][j+dc] === 1) livingNeighbors++;
+                }
+                
+            };
+
+            //we have the amt of living neighbors for this cell so apply the rules 
+            if (board[i][j] === 0 && livingNeighbors === 3) board[i][j] = 1;
+            if (board[i][j] && (livingNeighbors < 2 || livingNeighbors > 3)) board[i][j] = 0;
+            
+        }
+    }
+
+    return board;
+
+    //time - O(m x n)
+    //space - O(m x n)
+
+    
+    
+};
