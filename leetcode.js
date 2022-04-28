@@ -6283,3 +6283,24 @@ var gameOfLife = function(board) {
     
     
 };
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var rob = function(nums) {
+    
+    if (nums.length <= 2) return Math.max(...nums);
+    const copy = [...nums];
+    
+    //otherwise the length is greater than 2 so 
+    for (let i = nums.length - 3; i >= 0; i--) {
+        for (let j = i + 2; j < nums.length; j++) {
+            //we need to remember the original val hence the use of nums, but we also need to remember the accumulated values hence copy 
+            copy[i] = Math.max(copy[i], nums[i] + copy[j]);
+        }
+        
+    };
+    
+    return Math.max(...copy);
+};
