@@ -6304,3 +6304,32 @@ var rob = function(nums) {
     
     return Math.max(...copy);
 };
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var rob = function(nums) {
+    
+    if (nums.length === 1) return nums[0];
+    
+    var helper = function(nums) {
+        
+        let p = 0, pp = 0;
+        
+        for (const n of nums) {
+            const temp = Math.max(n + pp, p);
+            pp = p;
+            p = temp;
+        };
+        
+        return p;
+    }
+    
+    return Math.max(helper([...nums].slice(1)), helper([...nums].slice(0, nums.length-1)))
+    
+    
+    //we are iterate through the array once so its not too bad
+    
+    
+};
